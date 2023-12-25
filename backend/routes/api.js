@@ -28,7 +28,9 @@ route.patch(
   DepartmentController.updateDepartmentProfile
 )
 
-route.post('/departments/addStaff', DepartmentController.addStaffTransactionPoint)
+route.post('/departments/addStaff', authorize,DepartmentController.addStaffTransactionPoint)
+
+route.patch('/departments/updateStaffInfo', authorize, DepartmentController.updateStaffProfile)
 
 //------------------- COURIER APIS ------------------------------//
 route.post('/couriers/addCourier', authorize, CourierController.addCourierEntry)

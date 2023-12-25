@@ -186,14 +186,21 @@ async function updateDepartmentProfile(req, res) {
 /*
 @ method: post
 @ desc: add a staff at transactionpoint
-@ access: public
+@ access: private
 */
 
 async function addStaffTransactionPoint(req, res) {
   try {
-    console.log(req.body.phoneNumber)
+    console.log(req.body.staffDetails.phoneNumber)
+    const departmentId = req.department._id
+
+    console.log(departmentId)
+    // const department = await Department.findById(departmentId).select(
+    //   '-password'
+    // )
+
     const StaffExist = await StaffTransactionPoint.findOne({
-      phoneNumber: req.body.phoneNumber,
+      phoneNumber: req.body.staffDetails.phoneNumber,
     })
 
 
@@ -209,14 +216,14 @@ async function addStaffTransactionPoint(req, res) {
         data: {},
       })
     }
-    if (!req.body.password) {
+    if (!req.body.staffDetails.password) {
       return res.status(400).json({
         status: 'failure',
         message: 'Invalid Password Input',
         data: {},
       })
     }
-    const securePassword = await encryptPassword(req.body.password)
+    const securePassword = await encryptPassword(req.body.staffDetails.password)
     if (securePassword === null) {
       return res.status(500).json({
         status: 'failure',
@@ -225,22 +232,23 @@ async function addStaffTransactionPoint(req, res) {
       })
     }
     const staffTransactionPoint = new StaffTransactionPoint({
-      name: req.body.name,
-      email: req.body.email,
-      phoneNumber: req.body.phoneNumber,
-      departmentPinCode: req.body.departmentPinCode,
+      name: req.body.staffDetails.name,
+      email: req.body.staffDetails.email,
+      phoneNumber: req.body.staffDetails.phoneNumber,
+      departmentPinCode: req.body.staffDetails.departmentPinCode,
       password: securePassword,
+      transactionPointId: departmentId,
     })
 
     const newStaff = await staffTransactionPoint.save()
 
-    const loggedInStaff = { _id: staffTransactionPoint._id }
-    const accessToken = jwt.sign(loggedInStaff, process.env.JWT_SECRET)
+    // const loggedInStaff = { _id: staffTransactionPoint._id }
+    // const accessToken = jwt.sign(loggedInStaff, process.env.JWT_SECRET)
 
     return res.status(201).json({
       status: 'success',
       message: 'StaffTransaction added successfully',
-      data: { accessToken },
+      data: {  }, //{accesstoken}
     }) // 201 => creation success
   } catch (error) {
     return res.status(400).json({ message: error.message }) // 400 => invalid user inputs
@@ -248,10 +256,58 @@ async function addStaffTransactionPoint(req, res) {
 }
 
 
+
+/*
+@ method: patch
+@ desc: update profile of staff
+@ access: private
+*/
+async function updateStaffProfile(req, res) {
+  try {
+    const departmentId = req.department._id
+
+    if (!departmentId) {
+      return res.status(403).json({
+        status: 'failure',
+        message: 'Unauthorized',
+        data: {},
+      })
+    }
+    const staffDetails = req.body.staffsDetails
+    const staff = await StaffTransactionPoint.findById(staffDetails._id)
+
+    if (!staff) {
+      return res.status(404).json({
+        status: 'failure',
+        message: 'Staff not found',
+        data: {},
+      })
+    } else {
+      // courier.departmentStatus[departmentId] = courierDetails.status
+      await StaffTransactionPoint.findByIdAndUpdate(courierDetails._id, {
+        name: staffDetails.name,
+        email: staffDetails.email,
+        phoneNumber: staffDetails.phoneNumber,
+      })
+
+      return res.status(204).json({
+        status: 'success',
+        message: 'Staff Update Successful',
+        data: {},
+      })
+    }
+
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({ message: 'Something went wrong !' })
+  }
+}
+
 module.exports = {
   addDepartment,
   loginDepartment,
   getDepartmentProfile,
   updateDepartmentProfile,
   addStaffTransactionPoint,
+  updateStaffProfile,
 }

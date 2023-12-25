@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllStaffs } from '../../../state/actions/staffTansactionAction'
+import NewStaffModal from '../../NewStaffModal'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
@@ -29,7 +30,7 @@ import {
 } from '@mui/material'
 // import { search } from '../../../../../backend/routes/api'
 
-// import CourierDetailModal from '../../CourierDetailModal'
+import StaffDetailModal from '../../StaffDetailModal'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -261,7 +262,7 @@ const Staffs = () => {
             />
           </Box> */}
         </Box>
-        {/* <Box>
+        <Box>
           <Button
             variant='contained'
             endIcon={<AddOutlinedIcon />}
@@ -270,15 +271,15 @@ const Staffs = () => {
               backgroundColor: 'black',
               borderRadius: '20px',
             }}
-            onClick={handleNewCourierModalOpen}
+            onClick={handleNewStaffModalOpen}
           >
             Add New
           </Button>
-          <NewCourierModal
-            modalOpen={newCourierModalOpen}
-            handleModalClose={handleNewCourierModalClose}
+          <NewStaffModal
+            modalOpen={newStaffModalOpen}
+            handleModalClose={handleNewStaffModalClose}
           />
-        </Box> */}
+        </Box>
       </Box>
       {/* Table Data for couriers */}
       <Paper sx={{ mb: 2 }}>
@@ -297,15 +298,14 @@ const Staffs = () => {
                 .map((row, index) => {
                   return (
                     <TableRow hover key={row.id}>
-                      {/* <TableCell
+                      <TableCell
                         sx={{ textDecoration: 'underline', cursor: 'pointer' }}
                         onClick={() => {
-                          handleCourierDetailModalOpen()
-                          setSingleClickedCourierData(row)
+                          handleStaffDetailModalOpen()
+                          setSingleClickedStaffData(row)
                         }}
-                      > */}
-                      <TableCell>
-                        {row.id}
+                      >
+                      {row.id}
                       </TableCell>
                       <TableCell>{row.name}</TableCell>
                       <TableCell>{row.email}</TableCell>
@@ -341,11 +341,11 @@ const Staffs = () => {
       </Paper>
 
       <ToastContainer />
-      {/* <CourierDetailModal
-        modalOpen={courierDetailModalOpen}
-        handleModalClose={handleCourierDetailModalClose}
-        data={singleClickedCourierData}
-      /> */}
+      <StaffDetailModal
+        modalOpen={staffDetailModalOpen}
+        handleModalClose={handleStaffDetailModalClose}
+        data={singleClickedStaffData}
+      />
     </Box>
   )
 

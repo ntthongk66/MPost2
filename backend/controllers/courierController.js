@@ -12,6 +12,7 @@ const { sendEmail } = require('../utils/send_email_helper')
 async function addCourierEntry(req, res) {
   try {
     const departmentId = req.department._id // this is the id of loggedin department who is currently making the entry of this courier to their department (can be initiator as well as middle ones)
+    console.log(departmentId)
     const department = await Department.findById(departmentId).select(
       '-password'
     )

@@ -10,13 +10,20 @@ const staffTransactionPointSchema = new mongoose.Schema({
         require: true,
     },
     phoneNumber: {
-        type: Number,
+        type: String,
         require: true,
     },
     departmentPinCode: {
         type: Number,
         required: true,
     },
+
+    transactionPointId: {
+      type: mongoose.Schema.ObjectId,
+      required: true,
+      ref: 'Department',
+    },
+
     password: {
         type: String,
         require: true,
