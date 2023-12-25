@@ -264,7 +264,7 @@ async function addStaffTransactionPoint(req, res) {
 */
 async function updateStaffProfile(req, res) {
   try {
-    const departmentId = req.department._id
+    const departmentId = req.department._id // this is the id of loggedin department who is currently making the entry of this courier to their department (can be initiator as well as middle ones)
 
     if (!departmentId) {
       return res.status(403).json({
@@ -273,7 +273,7 @@ async function updateStaffProfile(req, res) {
         data: {},
       })
     }
-    const staffDetails = req.body.staffsDetails
+    const staffDetails = req.body.staffDetails
     const staff = await StaffTransactionPoint.findById(staffDetails._id)
 
     if (!staff) {
@@ -284,7 +284,7 @@ async function updateStaffProfile(req, res) {
       })
     } else {
       // courier.departmentStatus[departmentId] = courierDetails.status
-      await StaffTransactionPoint.findByIdAndUpdate(courierDetails._id, {
+      await StaffTransactionPoint.findByIdAndUpdate(staffDetails._id, {
         name: staffDetails.name,
         email: staffDetails.email,
         phoneNumber: staffDetails.phoneNumber,
