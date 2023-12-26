@@ -9,6 +9,7 @@ import { Box, Button, Grid } from '@mui/material'
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
 import Track from '../views/department/Track'
 import LoginDeliveryAgent from './LoginDeliveryAgent'
+import LoginStaffTransaction from './LoginStaff'
 
 const Auth = () => {
   const auth = useSelector((state) => state.auth)
@@ -86,6 +87,8 @@ const Auth = () => {
           element={<LoginDeliveryAgent />}
         />
         <Route exact path='/track/courier' element={<Track />} />
+
+        <Route exact path='auth/staffTransaction' element={<LoginStaffTransaction/>}/>
 
         <Route path='*' element={<Navigate to='/auth' replace />} />
       </Routes>

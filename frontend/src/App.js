@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import DepartmentMain from './components/DepartmentMain'
 import DeliveryAgentMain from './components/DeliveryAgentMain'
+import StaffTransactionMain from './components/StaffTransactionMain'
 
 function App() {
   const state = useSelector((state) => state)
@@ -13,6 +14,8 @@ function App() {
         <Auth />
       ) : state.auth.deliveryAgent != null ? (
         <DeliveryAgentMain />
+      ) : state.auth.staffTransaction != null ? (
+        <StaffTransactionMain />
       ) : (
         <DepartmentMain />
       )}
