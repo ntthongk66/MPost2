@@ -33,6 +33,7 @@ async function loginStaffTransaction(req, res) {
     }
 
     const loggedInStaffTransaction = { _id: staffTransaction.transactionPointId._id, staffId: staffTransaction._id }
+    ///////////
     const accessToken = jwt.sign(loggedInStaffTransaction, process.env.JWT_SECRET)
 
     const decryptedPasswordDB = await decryptPassword(
@@ -99,6 +100,7 @@ async function getDepartmentProfile(req, res) {
 async function getAllStaffs(req, res) {
   try {
     var departmentId = req.department._id
+    // console.log('departmentId', departmentId)
     var allStaffs = await StaffTransactionPoint.find()
     // .populate('senderDetails')
     // .populate('receiverDetails')

@@ -137,6 +137,15 @@ const Sidebar = () => {
                     setSelected={setSelected}
                   />
                 </Box>
+                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                  <Item
+                    title='Staff'
+                    to='/staffWH'
+                    icon={<PeopleAlt />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </Box>
               </Box>
             ) : (
               <Box>

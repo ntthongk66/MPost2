@@ -62,6 +62,21 @@ function LoginStaffTransaction() {
 						Track Courier
 					</Button>
 				</Link>
+				<Link to="/auth" style={{ textDecoration: 'none' }}>
+					<Button
+						variant="contained"
+						color="primary"
+						sx={{
+							mt: 1,   // Đổi mt từ 2 xuống 1 để giữ nút "Track Courier" ngay dưới
+							ml: 2,   // Thêm khoảng cách giữa các nút
+							borderRadius: '20px',
+							color: 'white',
+							backgroundColor: 'black',
+						}}
+					>
+						Admin
+					</Button>
+				</Link>
 			</Box>
 			<Grid container>
 				{/* Login or Signup */}
