@@ -8,6 +8,7 @@ const StaffTransactionPointController = require('../controllers/staffTransaction
 const {
   authorize,
   authorizeDeliveryAgent,
+  authorizeStaffTransaction,
 } = require('../middleware/authorizationMiddleware')
 
 route.get('/', (req, res) => {

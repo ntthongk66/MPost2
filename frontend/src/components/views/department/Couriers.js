@@ -157,58 +157,167 @@ const getRowsList = (couriersList) => {
 
 const createPdf = (data) => {
   const pdfGenerator = pdfMake.createPdf({
-    pageSize: 'A7',
+    pageSize: 'A4',
+    pageOrientation: 'landscape',
     header: [
       {
-        text: 'Courier TnM',
-        margin: 5,
-        fontSize: '10',
-        bold: true,
-        alignment: 'center',
+        columns: [
+          // {
+          //   image: imagePath,
+          //   width: 100, // Điều chỉnh kích thước của ảnh nếu cần thiết
+          //   margin: [5, 5, 5, 0],
+          // },
+          {
+            stack: [
+              {
+                text: 'Magic Post',
+                margin: [5, 5, 5, 0],
+                fontSize: 20,
+                bold: true,
+                alignment: 'left',
+                italics: true,
+              },
+            ],
+          },
+          {
+            stack: [
+              {
+                text: 'QR code',
+                alignment: 'right',
+                fontSize: 14,
+                bold: true,
+                italics: true,
+                margin: [0, 0, 5, 0],
+              },
+              
+            ],
+          },
+        ],
       },
     ],
+  
     content: [
       {
-        text: 'Receiver Details',
-        fontSize: '7',
-        bold: true,
-        decoration: 'underline',
+        style: 'tableExample',
+        table: {
+          widths: ['*', '*'],
+          body: [
+            [
+              {
+                stack: [
+                  {text: 'Receiver Details', bold: true},
+                  {
+                    ul: [
+
+                      { text: `Name: ${data.receiver.name}` },
+                      { text: `Phone: ${data.receiver.phoneNumber}` },
+                      { text: `Email: ${data.receiver.email}` },
+                      { text: `Address: ${data.receiver.location}, ${data.receiver.city}, ${data.receiver.state}, ${data.receiver.country}, ${data.receiver.pincode}`},
+                    ],
+                  },
+                ],
+                margin: [0, 0, 0, 10], // Khoảng cách dưới bảng Receiver Details
+              },
+              {
+                stack: [
+                  {text: 'Sender Details', bold: true},
+                  {
+                    ul: [
+
+                      { text: `Name: ${data.sender.name}` },
+                      { text: `Phone: ${data.sender.phoneNumber}` },
+                      { text: `Email: ${data.sender.email}` },
+                      { text: `Address: ${data.sender.location}, ${data.sender.city}, ${data.sender.state}, ${data.sender.country}, ${data.sender.pincode}` },
+                    ],
+                  },
+                ],
+                margin: [0, 0, 0, 10], // Khoảng cách dưới bảng Sender Details
+              },
+            ],
+          ],
+        },
       },
       {
-        text: `Name: ${data.receiver.name}\nPhone: ${data.receiver.phoneNumber}\nEmail: ${data.receiver.email}\nAddress: ${data.receiver.location}, ${data.receiver.city}, ${data.receiver.state}, ${data.receiver.country}, ${data.receiver.pincode}`,
-        fontSize: '5',
-        marginTop: 2,
-      },
-      {
-        text: 'Sender Details',
-        fontSize: '7',
-        bold: true,
-        decoration: 'underline',
-        marginTop: 5,
-      },
-      {
-        text: `Name: ${data.sender.name}\nPhone: ${data.sender.phoneNumber}\nEmail: ${data.sender.email}\nAddress: ${data.sender.location}, ${data.sender.city}, ${data.sender.state}, ${data.sender.country}, ${data.sender.pincode}`,
-        fontSize: '5',
-        marginTop: 2,
-      },
-      {
-        text: 'Package Details',
-        fontSize: '7',
-        bold: true,
-        decoration: 'underline',
-        marginTop: 5,
-      },
-      {
-        text: `Reference ID: ${data.id}\nItem Description: ${data.item}\nWeight: ${data.weight}`,
-        fontSize: '5',
-        bold: true,
-        marginTop: 5,
+        style: 'tableExample',
+        table: {
+          widths: ['*'],
+          body: [
+            [
+              {
+                stack: [
+                  { text: 'Package Details', bold: true },
+                  {
+                    ul: [
+
+                      { text:  `Reference ID: ${data.id}` },
+                      { text: `Item Description: ${data.item}`},
+                      { text: `Weight: ${data.weight}` },
+                      { text: `Status: ${data.status}`},
+                    ],
+                  },
+                ],
+                margin: [0, 10, 0, 0], // Khoảng cách trên bảng Package Details
+              },
+            ],
+          ],
+        },
       },
     ],
+
+    // pageSize: 'A4',
+    // header: [
+    //   {
+    //     text: 'Courier TnM',
+    //     margin: 5,
+    //     fontSize: '10',
+    //     bold: true,
+    //     alignment: 'center',
+    //   },
+    // ],
+    // content: [
+    //   {
+    //     text: 'Receiver Details',
+    //     fontSize: '7',
+    //     bold: true,
+    //     decoration: 'underline',
+    //   },
+    //   {
+    //     text: `Name: ${data.receiver.name}\nPhone: ${data.receiver.phoneNumber}\nEmail: ${data.receiver.email}\nAddress: ${data.receiver.location}, ${data.receiver.city}, ${data.receiver.state}, ${data.receiver.country}, ${data.receiver.pincode}`,
+    //     fontSize: '5',
+    //     marginTop: 2,
+    //   },
+    //   {
+    //     text: 'Sender Details',
+    //     fontSize: '7',
+    //     bold: true,
+    //     decoration: 'underline',
+    //     marginTop: 5,
+    //   },
+    //   {
+    //     text: `Name: ${data.sender.name}\nPhone: ${data.sender.phoneNumber}\nEmail: ${data.sender.email}\nAddress: ${data.sender.location}, ${data.sender.city}, ${data.sender.state}, ${data.sender.country}, ${data.sender.pincode}`,
+    //     fontSize: '5',
+    //     marginTop: 2,
+    //   },
+    //   {
+    //     text: 'Package Details',
+    //     fontSize: '7',
+    //     bold: true,
+    //     decoration: 'underline',
+    //     marginTop: 5,
+    //   },
+    //   {
+    //     text: `Reference ID: ${data.id}\nItem Description: ${data.item}\nWeight: ${data.weight}`,
+    //     fontSize: '5',
+    //     bold: true,
+    //     marginTop: 5,
+    //   },
+    // ],
   })
   var win = window.open('', '_blank')
   pdfGenerator.print({}, win)
 }
+
+
 
 const Couriers = () => {
   pdfMake.vfs = pdfFonts.pdfMake.vfs
