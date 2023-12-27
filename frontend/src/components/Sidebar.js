@@ -139,6 +139,24 @@ const Sidebar = () => {
                 </Box>
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
+                    title='Waiting'
+                    to='/courierWaiting'
+                    icon={<LocalShippingOutlinedIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </Box>
+                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                  <Item
+                    title='Accepted'
+                    to='/courierAccepted'
+                    icon={<LocalShippingOutlinedIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </Box>
+                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                  <Item
                     title='Staff'
                     to='/staffWH'
                     icon={<PeopleAlt />}
