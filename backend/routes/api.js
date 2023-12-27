@@ -44,6 +44,13 @@ route.patch(
   authorize,
   CourierController.updateCourierEntry
 )
+route.get('/couriers/getCouriersWh', authorizeDeliveryAgent, CourierController.getAllCouriersWh)
+
+route.patch(
+  '/couriers/updateCourierWh',
+  authorizeDeliveryAgent,
+  CourierController.updateCourierEntryWh
+)
 
 //----------------- DELIVERY AGENT APIS -------------------------//
 route.post(

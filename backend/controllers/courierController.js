@@ -1,8 +1,10 @@
 const Courier = require('../models/courierModel')
 const Department = require('../models/departmentModel')
+const DeliveryAgent = require('../models/deliveryAgentModel')
 const Customer = require('../models/customerModel')
 const url = require('url')
 const { sendEmail } = require('../utils/send_email_helper')
+
 
 /*
 @ method: post
@@ -120,6 +122,10 @@ async function addCourierEntry(req, res) {
       const courier = await new Courier({
         senderDetails: senderDetails._id,
         receiverDetails: receiverDetails._id,
+        sendWhStatus: "Waiting",
+        recieveWhStatus: "None",
+        sendDepStatus: "Accepted",
+        recieveDepStatus: "None",
         packageName: courierDetails.packageName,
         packageWeight: courierDetails.packageWeight,
         status: initialStatus,
@@ -162,6 +168,7 @@ async function getAllCouriers(req, res) {
     for (const courier of allCouriers) {
       if (Object.values(courier.tracker).includes(departmentId)) {
         resultingAllDepartmentCouriers.push(courier)
+        // console.log(courier)
       }
     }
 
@@ -256,9 +263,148 @@ async function getTrackingDetails(req, res) {
 
 /*
 @ method: post
-@ desc: update a courier detail
+@ desc: update a courier detail for delivery
 @ access: private
 */
+async function updateCourierEntryWh(req, res) {
+  try {
+    const warehouseId = req.deliveryAgent._id // this is the id of loggedin department who is currently making the entry of this courier to their department (can be initiator as well as middle ones)
+    if (!warehouseId) {
+      return res.status(403).json({
+        status: 'failure',
+        message: 'Unauthorized',
+        data: {},
+      })
+    }
+    const courierDetails = req.body.courierDetails
+    const courier = await Courier.findById(courierDetails._id)
+      .populate('senderDetails')
+      .populate('receiverDetails')
+    if (!courier) {
+      return res.status(404).json({
+        status: 'failure',
+        message: 'Courier not found',
+        data: {},
+      })
+    } else {
+
+      if (courier.sendWhStatus == "Waiting") {
+        await Courier.findByIdAndUpdate(courierDetails._id, {
+          sendWhStatus: "Accepted",
+          recieveWhStatus: "Waiting",
+        })
+      } else if (courier.sendWhStatus == "Accepted" && courier.recieveWhStatus == "Waiting") {
+        await Courier.findByIdAndUpdate(courierDetails._id, {
+          sendWhStatus: "Accepted",
+          recieveWhStatus: "Accepted",
+        })
+      } else if (courier.sendWhStatus == "Accepted" && courier.recieveWhStatus == "Accepted") {
+        recieveDepPincode = courier.receiverDetails.pincode
+
+        const department = await Department.findOne({
+          pinCode: recieveDepPincode
+        })
+        console.log(courier.receiverDetails)
+        if (department) {
+
+          const departmentId = department._id
+          var getDate = Date.now().toString()
+          courier.tracker[getDate] = departmentId.toString()
+          courier.departmentStatus[department._id] = "Waiting"
+          const midStatus = `Package arrived at ${department.name}, ${department.location}, ${department.city}`
+
+
+          await Courier.findByIdAndUpdate(courierDetails._id, {
+            tracker: courier.tracker,
+            recieveDepStatus: "Waiting",
+            departmentStatus: courier.departmentStatus,
+            status: midStatus,
+            updatedAt: Date.now(),
+          })
+        }
+      } else {
+        console.log("elseeeeee")
+      }
+
+      // courier.departmentStatus[departmentId] = courierDetails.status
+      // await Courier.findByIdAndUpdate(courierDetails._id, {
+      //   packageName: courierDetails.item,
+      //   packageWeight: courierDetails.weight,
+      //   departmentStatus: courier.departmentStatus,
+
+      // })
+
+      return res.status(204).json({
+        status: 'success',
+        message: 'Courier Update Successful',
+        data: {},
+      })
+    }
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({ message: 'Something went wrong !' })
+  }
+}
+
+/*
+@ method: get
+@ desc: get all couriers for a department
+@ access: private
+*/
+async function getAllCouriersWh(req, res) {
+  try {
+    var warehouseId = req.deliveryAgent._id
+    const warehouse = await DeliveryAgent.findById(warehouseId)
+    const warehousePinCode = warehouse.pinCode
+
+    var allCouriers = await Courier.find()
+      .populate('senderDetails')
+      .populate('receiverDetails')
+
+    // console.log(allCouriers)
+
+    var AllAcceptedWarehouseCouriers = []
+    var AllWaitingWarehouseCouriers = []
+
+    for (const courier of allCouriers) {
+      // console.log("courier Pincode", courier.senderDetails.pincode)
+      // console.log("Warehouse Pincode", warehousePinCode)
+      if (courier.senderDetails.pincode == warehousePinCode) {
+
+        // console.log("senderWh")
+        if (courier.sendWhStatus == "Waiting") {
+          AllWaitingWarehouseCouriers.push(courier)
+        }
+
+        if (courier.sendWhStatus == "Accepted") {
+          AllAcceptedWarehouseCouriers.push(courier)
+        }
+      } else {
+        if (courier.recieveWhStatus == "Waiting") {
+          AllWaitingWarehouseCouriers.push(courier)
+        }
+
+        if (courier.recieveWhStatus == "Accepted") {
+          AllAcceptedWarehouseCouriers.push(courier)
+        }
+      }
+    }
+    // console.log(AllWaitingWarehouseCouriers)
+
+    return res.status(200).json({
+      status: 'success',
+      message: 'Couriers Fetched Successful',
+      data: {
+        Waiting: AllWaitingWarehouseCouriers,
+        Accepted: AllAcceptedWarehouseCouriers,
+      },
+    })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({ message: 'Something went wrong !' })
+  }
+}
+
 async function updateCourierEntry(req, res) {
   try {
     const departmentId = req.department._id // this is the id of loggedin department who is currently making the entry of this courier to their department (can be initiator as well as middle ones)
@@ -283,6 +429,7 @@ async function updateCourierEntry(req, res) {
         packageName: courierDetails.item,
         packageWeight: courierDetails.weight,
         departmentStatus: courier.departmentStatus,
+
       })
 
       return res.status(204).json({
@@ -303,4 +450,6 @@ module.exports = {
   getCourierById,
   getTrackingDetails,
   updateCourierEntry,
+  getAllCouriersWh,
+  updateCourierEntryWh,
 }
