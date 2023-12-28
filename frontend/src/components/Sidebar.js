@@ -91,10 +91,10 @@ const Sidebar = () => {
                   variant='h5'
                   style={{ color: 'black', fontWeight: 'bold' }}
                 >
-                  CourierTnM
+                  MagicPost
                 </Typography>
                 <img
-                  src='https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png'
+                  src='https://scontent.fhan5-10.fna.fbcdn.net/v/t39.30808-6/414988653_1559192131496580_4769104880427762473_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=3635dc&_nc_ohc=F38-OLvfmrMAX-1ff5g&_nc_ht=scontent.fhan5-10.fna&oh=00_AfB-lxZBI18KQsmcW_juSrvatN0AYGwDuRtmDpr17feiyA&oe=6591AE65'
                   alt='Courier-Tn-M'
                   height={75}
                 />

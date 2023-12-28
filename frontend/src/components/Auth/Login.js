@@ -37,7 +37,7 @@ function Login(prop) {
         }}
       >
         <div id='loginText' style={{ fontSize: '20pt', fontWeight: 'bold' }}>
-          Hey! Welcome
+          Welcome Courier Department!
         </div>
         <div style={{ color: 'grey', fontSize: '10pt' }}>
           Login to deliver with ease

@@ -80,7 +80,7 @@ function LoginDeliveryAgent() {
       </Box>
       <Grid container>
         {/* Login or Signup */}
-        <Grid item xs={6}>
+        <Grid item xs={6} marginTop={5}>
           <Box id='authForm'>
             <Container maxWidth='s'>
               <Box
@@ -94,7 +94,7 @@ function LoginDeliveryAgent() {
                   id='loginText'
                   style={{ fontSize: '20pt', fontWeight: 'bold' }}
                 >
-                  Hey! Welcome
+                  Welcome Delivery Agent!
                 </div>
                 <div style={{ color: 'grey', fontSize: '10pt' }}>
                   Login to deliver with ease
@@ -144,10 +144,11 @@ function LoginDeliveryAgent() {
           </Box>
         </Grid>
         {/* Intro Landing */}
-        <Grid item xs={6} marginTop={12}>
+        <Grid item xs={6}>
           <img
-            src='https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png'
-            alt='Courier-Tn-M'
+            src="https://png.pngtree.com/png-clipart/20211128/original/pngtree-courier-logo-png-image_6952321.png"
+            alt='MagicPost'
+            width='500' height='500'
           />
         </Grid>
       </Grid>

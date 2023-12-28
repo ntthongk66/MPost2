@@ -92,11 +92,11 @@ const StaffSidebar = () => {
                   variant='h5'
                   style={{ color: 'black', fontWeight: 'bold' }}
                 >
-                  CourierTnM
+                  MagicPost
                 </Typography>
                 <img
-                  src='https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png'
-                  alt='Courier-Tn-M'
+                  src="https://png.pngtree.com/png-clipart/20211128/original/pngtree-courier-logo-png-image_6952321.png"
+                  alt='MagicPost'
                   height={75}
                 />
               </Box>

@@ -74,7 +74,7 @@ const Auth = () => {
               </Box>
               <Grid container>
                 {/* Login or Signup */}
-                <Grid item xs={6}>
+                <Grid item xs={6} marginTop={5}>
                   <Box id='authForm'>
                     {isLogin ? (
                       <Login handleAuthToggle={changeAuthType} />
@@ -87,10 +87,11 @@ const Auth = () => {
                   </Box>
                 </Grid>
                 {/* Intro Landing */}
-                <Grid item xs={6} marginTop={12}>
+                <Grid item xs={6}>
                   <img
-                    src='https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png'
-                    alt='Courier-Tn-M'
+                    src="https://png.pngtree.com/png-clipart/20211128/original/pngtree-courier-logo-png-image_6952321.png"
+                    alt='MagicPost'
+                    width='500' height='500'
                   />
                 </Grid>
               </Grid>
