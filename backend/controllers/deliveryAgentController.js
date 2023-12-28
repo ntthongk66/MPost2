@@ -2,6 +2,11 @@ require('dotenv').config()
 
 const DeliveryAgent = require('../models/deliveryAgentModel')
 const Courier = require('../models/courierModel')
+const StaffWarehouse = require('../models/staffWarehouseModel')
+const {
+  encryptPassword,
+  decryptPassword,
+} = require('../utils/password_encrypt_decrypt_helper')
 const jwt = require('jsonwebtoken')
 
 /*
@@ -32,6 +37,9 @@ async function loginDeliveryAgent(req, res) {
     if (password === deliveryAgent.password) {
       const delAgent = deliveryAgent.toObject()
       delete delAgent.password
+
+      // console.log(delAgent)
+      
       return res.status(200).json({
         status: 'success',
         message: 'Login Success',
@@ -57,6 +65,7 @@ async function loginDeliveryAgent(req, res) {
 async function addEntryDeliveryAgent(req, res) {
   try {
     const deliveryAgentId = req.deliveryAgent._id
+    // console.log(req)
     const courierId = req.body._id
     const courier = await Courier.findById(courierId)
     if (!courier) {
@@ -148,8 +157,128 @@ async function markDeliveredByDeliveryAgent(req, res) {
   }
 }
 
+/*
+@ method: post
+@ desc: add a staff at warehouse
+@ access: private
+*/
+
+async function addStaffWarehouse(req, res) {
+  try {
+    console.log(req.body.staffDetails.phoneNumber)
+    const warehouseId = req.deliveryAgent._id
+
+    console.log(warehouseId)
+    // const department = await Department.findById(departmentId).select(
+    //   '-password'
+    // )
+
+    const StaffExist = await StaffWarehouse.findOne({
+      phoneNumber: req.body.staffDetails.phoneNumber,
+    })
+
+
+    // const pinCodeDepartmentExit = await Department.findOne({
+    //   pinCode = 
+    // })
+
+
+    if (StaffExist) {
+      return res.status(400).json({
+        status: 'failure',
+        message: 'StaffTransaction with given registration number already exists',
+        data: {},
+      })
+    }
+    if (!req.body.staffDetails.password) {
+      return res.status(400).json({
+        status: 'failure',
+        message: 'Invalid Password Input',
+        data: {},
+      })
+    }
+    const securePassword = await encryptPassword(req.body.staffDetails.password)
+    if (securePassword === null) {
+      return res.status(500).json({
+        status: 'failure',
+        message: 'Password Encryption failed',
+        data: {},
+      })
+    }
+    const staffWarehouse = new StaffWarehouse({
+      name: req.body.staffDetails.name,
+      email: req.body.staffDetails.email,
+      phoneNumber: req.body.staffDetails.phoneNumber,
+      password: securePassword,
+      warehouseId: warehouseId,
+    })
+
+    const newStaff = await staffWarehouse.save()
+
+    // const loggedInStaff = { _id: staffTransactionPoint._id }
+    // const accessToken = jwt.sign(loggedInStaff, process.env.JWT_SECRET)
+
+    return res.status(201).json({
+      status: 'success',
+      message: 'StaffTransaction added successfully',
+      data: {  }, //{accesstoken}
+    }) // 201 => creation success
+  } catch (error) {
+    return res.status(400).json({ message: error.message }) // 400 => invalid user inputs
+  }
+}
+
+/*
+@ method: patch
+@ desc: update profile of staff
+@ access: private
+*/
+async function updateStaffProfile(req, res) {
+  try {
+    const warehouseId = req.deliveryAgent._id // this is the id of loggedin department who is currently making the entry of this courier to their department (can be initiator as well as middle ones)
+
+    if (!warehouseId) {
+      return res.status(403).json({
+        status: 'failure',
+        message: 'Unauthorized',
+        data: {},
+      })
+    }
+    const staffDetails = req.body.staffDetails
+    const staff = await StaffWarehouse.findById(staffDetails._id)
+
+    if (!staff) {
+      return res.status(404).json({
+        status: 'failure',
+        message: 'Staff not found',
+        data: {},
+      })
+    } else {
+      // courier.departmentStatus[departmentId] = courierDetails.status
+      await StaffWarehouse.findByIdAndUpdate(staffDetails._id, {
+        name: staffDetails.name,
+        email: staffDetails.email,
+        phoneNumber: staffDetails.phoneNumber,
+      })
+
+      return res.status(204).json({
+        status: 'success',
+        message: 'Staff Update Successful',
+        data: {},
+      })
+    }
+
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({ message: 'Something went wrong !' })
+  }
+}
+
+
 module.exports = {
   loginDeliveryAgent,
   addEntryDeliveryAgent,
   markDeliveredByDeliveryAgent,
+  addStaffWarehouse,
+  updateStaffProfile,
 }

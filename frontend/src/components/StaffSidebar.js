@@ -1,22 +1,22 @@
 import { useState } from 'react'
 import {
-  ProSidebar,
-  Menu,
-  MenuItem,
-  SidebarContent,
-  SidebarFooter,
+	ProSidebar,
+	Menu,
+	MenuItem,
+	SidebarContent,
+	SidebarFooter,
 } from 'react-pro-sidebar'
 import { Box, Typography } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 import 'react-pro-sidebar/dist/css/styles.css'
 import HomeIcon from '@mui/icons-material/Home'
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
+// import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import ShareLocationOutlinedIcon from '@mui/icons-material/ShareLocationOutlined'
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined'
 import DeliveryDiningOutlinedIcon from '@mui/icons-material/DeliveryDiningOutlined'
-import PeopleAlt from '@mui/icons-material/PeopleAlt'
+// import PeopleAlt from '@mui/icons-material/PeopleAlt'
 import { useDispatch } from 'react-redux'
 import { logout } from '../state/actions/authActions'
 import colors from '../colors'
@@ -24,26 +24,26 @@ import '../styles/Sidebar.css'
 import { useSelector } from 'react-redux'
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
-  return (
-    <MenuItem
-      active={selected === title}
-      style={{
-        color: 'black',
-        backgroundColor: selected === title ? colors.active : 'transparent',
-        fontWeight: 'bold',
-        borderRadius: '5px',
-      }}
-      onClick={() => setSelected(title)}
-      icon={icon}
-    >
-      <Typography>{title.toUpperCase()}</Typography>
-      <Link to={to} />
-    </MenuItem>
-  )
+	return (
+		<MenuItem
+			active={selected === title}
+			style={{
+				color: 'black',
+				backgroundColor: selected === title ? colors.active : 'transparent',
+				fontWeight: 'bold',
+				borderRadius: '5px',
+			}}
+			onClick={() => setSelected(title)}
+			icon={icon}
+		>
+			<Typography>{title.toUpperCase()}</Typography>
+			<Link to={to} />
+		</MenuItem>
+	)
 }
 
-const Sidebar = () => {
-  const department = useSelector((state) => state.auth.department)
+const StaffSidebar = () => {
+  const staffTransaction = useSelector((state) => state.auth.staffTransaction)
   const deliveryAgent = useSelector((state) => state.auth.deliveryAgent)
   const currentLoc = useLocation().pathname.split('/')[1]
 
@@ -108,12 +108,12 @@ const Sidebar = () => {
                   fontWeight='bold'
                   sx={{ m: '10px 0 0 0', color: 'black' }}
                 >
-                  {deliveryAgent ? deliveryAgent.name : department.name}
+                  {deliveryAgent ? deliveryAgent.name : `Staff name # ${staffTransaction.name}`}
                 </Typography>
                 <Typography>
                   {deliveryAgent
                     ? `Phone Number # ${deliveryAgent.phoneNumber}`
-                    : `Registration Number # ${department.registrationNumber}`}
+                    : `Phone Number # ${staffTransaction.phoneNumber}`}
                 </Typography>
               </Box>
             </Box>
@@ -137,29 +137,20 @@ const Sidebar = () => {
                     setSelected={setSelected}
                   />
                 </Box>
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
-                  <Item
-                    title='Staff'
-                    to='/staffWH'
-                    icon={<PeopleAlt />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                </Box>
               </Box>
             ) : (
               <Box>
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='dashboard'
-                    to='/dashboard'
+                    to='/staffTransaction/dashboard'
                     icon={<HomeIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                 </Box>
 
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                {/* <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='profile'
                     to='/profile'
@@ -167,12 +158,12 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                </Box>
+                </Box> */}
 
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='couriers'
-                    to='/couriers'
+                    to='staffTransaction/couriers'
                     icon={<LocalShippingOutlinedIcon />}
                     selected={selected}
                     setSelected={setSelected}
@@ -181,13 +172,13 @@ const Sidebar = () => {
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='track'
-                    to='/track/courier'
+                    to='staffTransaction/track/courier'
                     icon={<ShareLocationOutlinedIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                 </Box>
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                {/* <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='staff'
                     to='/staffs'
@@ -195,7 +186,7 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                </Box>
+                </Box> */}
               </Box>
             )}
           </Menu>
@@ -222,4 +213,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default StaffSidebar

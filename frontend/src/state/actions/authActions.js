@@ -19,7 +19,7 @@ export const login = (credential) => {
           dispatch({
             type: 'DEPARTMENT_NOT_FOUND',
           })
-          toast.error('Department not found with given credentials', {
+          toast.error('Department not found with given credentials - login', {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
@@ -131,7 +131,7 @@ export const getDepartmentInfo = (accessToken) => {
           dispatch({
             type: 'DEPARTMENT_NOT_FOUND',
           })
-          toast.error('Department not found with given credentials', {
+          toast.error('Department not found with given credentials - getInfo', {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
@@ -223,7 +223,7 @@ export const updateDepartmentInfo = (accessToken, details) => {
           dispatch({
             type: 'DEPARTMENT_NOT_FOUND',
           })
-          toast.error('Department not found with given credentials', {
+          toast.error('Department not found with given credentials - updateInfo', {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
@@ -336,6 +336,65 @@ export const loginDeliveryAgent = (credential) => {
             dispatch({
               type: 'DELIVERY_AGENT_LOGIN_SUCCESS',
               payload: res.data,
+            })
+          })
+        }
+      })
+      .catch((error) => {
+        dispatch({
+          type: 'LOGIN_REQUEST_ERROR',
+        })
+      })
+  }
+}
+
+export const loginStaffTransaction = (credential) => {
+  return (dispatch) => {
+    const url = `${apiHost}/api/staffTransactions/loginStaffTransaction`
+    fetch(url, {
+      method: 'post',
+      body: JSON.stringify({
+        email: credential.email,
+        password: credential.password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.status === 404) {
+          dispatch({
+            type: 'STAFF_NOT_FOUND',
+          })
+          toast.error('Transaction Staff not found with given credentials', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+          })
+        } else if (response.status === 401) {
+          dispatch({
+            type: 'INVALID_PASSWORD',
+          })
+          toast.error('Invalid Password', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+          })
+        } else if (response.status === 200) {
+          response.json().then((res) => {
+            dispatch({
+              type: 'STAFF_TRANSACTION_LOGIN_SUCCESS',
+              payload: res.data,//
             })
           })
         }

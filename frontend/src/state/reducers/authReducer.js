@@ -3,6 +3,7 @@ const initState = {
   accessToken: null,
   department: null,
   deliveryAgent: null,
+  staffTransaction: null,
 }
 
 const authReducer = (state = initState, action) => {
@@ -14,6 +15,7 @@ const authReducer = (state = initState, action) => {
         accessToken: null,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
     case 'LOGIN_SUCCESS':
       return {
@@ -22,6 +24,7 @@ const authReducer = (state = initState, action) => {
         error: null,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
 
     case 'DELIVERY_AGENT_LOGIN_SUCCESS':
@@ -31,6 +34,16 @@ const authReducer = (state = initState, action) => {
         error: null,
         department: null,
         deliveryAgent: action.payload.deliveryAgent,
+        staffTransaction: null,
+      }
+    case 'STAFF_TRANSACTION_LOGIN_SUCCESS':
+      return {
+        ...state,
+        accessToken: action.payload.accessToken, //.accesToken
+        error: null,
+        department: null,
+        deliveryAgent: null,
+        staffTransaction: action.payload.staffTransaction,
       }
     case 'DEPARTMENT_NOT_FOUND':
       return {
@@ -39,6 +52,7 @@ const authReducer = (state = initState, action) => {
         accessToken: null,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
     case 'DELIVERYAGENT_NOT_FOUND':
       return {
@@ -47,7 +61,18 @@ const authReducer = (state = initState, action) => {
         accessToken: null,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
+    case 'STAFF_NOT_FOUND':
+      return {
+        ...state,
+        error: 'No Staff found with the given email or password',
+        accessToken: null,
+        department: null,
+        deliveryAgent: null,
+        staffTransaction: null,
+      }
+
     case 'INVALID_PASSWORD':
       return {
         ...state,
@@ -55,6 +80,7 @@ const authReducer = (state = initState, action) => {
         accessToken: null,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
     case 'REGISTER_REQUEST_ERROR':
       return {
@@ -63,6 +89,7 @@ const authReducer = (state = initState, action) => {
         accessToken: null,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
     case 'REGISTER_SUCCESS':
       return {
@@ -71,6 +98,7 @@ const authReducer = (state = initState, action) => {
         error: null,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
 
     case 'REGISTER_FAILURE':
@@ -80,6 +108,7 @@ const authReducer = (state = initState, action) => {
         error: action.payload.message,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
     case 'UNAUTHORIZED':
       return {
@@ -87,6 +116,7 @@ const authReducer = (state = initState, action) => {
         error: 'Unauthorized',
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
     case 'INVALID_ACCESS_TOKEN':
       return {
@@ -94,6 +124,7 @@ const authReducer = (state = initState, action) => {
         error: 'INVALID ACCESS TOKEN',
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
     case 'PROFILE_FETCH_SUCCESS':
       return {
@@ -101,6 +132,7 @@ const authReducer = (state = initState, action) => {
         error: null,
         department: action.payload,
         deliveryAgent: null,
+        staffTransaction: null,
       }
     case 'PROFILE_FETCH_ERROR':
       return {
@@ -108,6 +140,7 @@ const authReducer = (state = initState, action) => {
         error: action.payload,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
     case 'PROFILE_UPDATE_SUCCESS':
       return {
@@ -115,6 +148,7 @@ const authReducer = (state = initState, action) => {
         error: null,
         department: action.payload,
         deliveryAgent: null,
+        staffTransaction: null,
       }
 
     case 'LOGOUT':
@@ -124,7 +158,12 @@ const authReducer = (state = initState, action) => {
         error: null,
         department: null,
         deliveryAgent: null,
+        staffTransaction: null,
       }
+
+
+
+
     default:
       return state
   }

@@ -9,6 +9,7 @@ import { Box, Button, Grid } from '@mui/material'
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
 import Track from '../views/department/Track'
 import LoginDeliveryAgent from './LoginDeliveryAgent'
+import LoginStaffTransaction from './LoginStaff'
 
 const Auth = () => {
   const auth = useSelector((state) => state.auth)
@@ -45,13 +46,28 @@ const Auth = () => {
                     color="primary"
                     sx={{
                       mt: 1,   // Đổi mt từ 2 xuống 1 để giữ nút "Track Courier" ngay dưới
-                      ml: 2,   // Thêm khoảng cách giữa các nút
+                      ml: 3,   // Thêm khoảng cách giữa các nút
                       borderRadius: '20px',
                       color: 'white',
                       backgroundColor: 'black',
                     }}
                   >
                     Track Courier
+                  </Button>
+                </Link>
+                <Link to="/auth/staffTransaction" style={{ textDecoration: 'none' }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{
+                      mt: 1,   // Đổi mt từ 2 xuống 1 để giữ nút "Track Courier" ngay dưới
+                      ml: 3,   // Thêm khoảng cách giữa các nút
+                      borderRadius: '20px',
+                      color: 'white',
+                      backgroundColor: 'black',
+                    }}
+                  >
+                    Staff
                   </Button>
                 </Link>
               </Box>
@@ -86,6 +102,8 @@ const Auth = () => {
           element={<LoginDeliveryAgent />}
         />
         <Route exact path='/track/courier' element={<Track />} />
+
+        <Route exact path='auth/staffTransaction' element={<LoginStaffTransaction/>}/>
 
         <Route path='*' element={<Navigate to='/auth' replace />} />
       </Routes>

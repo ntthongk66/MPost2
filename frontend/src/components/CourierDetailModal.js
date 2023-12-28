@@ -79,7 +79,12 @@ function UserCard({ customer }) {
 
 const CourierDetailModal = (props) => {
   const auth = useSelector((state) => state.auth)
-  const depId = auth.department._id
+  var depId = null
+  if (auth.staffTransaction != null) {
+    depId = auth.staffTransaction.transactionPointId
+  } else {
+    depId = auth.department._id
+  }
   const [value, setValue] = useState(0)
 
   const handleTabChange = (event, newValue) => {

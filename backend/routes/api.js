@@ -4,6 +4,7 @@ const DepartmentController = require('../controllers/departmentController')
 const CourierController = require('../controllers/courierController')
 const DeliveryAgentController = require('../controllers/deliveryAgentController')
 const StaffTransactionPointController = require('../controllers/staffTransactionPointController')
+const StaffWarehouseController = require('../controllers/staffWarehouseController')
 
 const {
   authorize,
@@ -59,11 +60,18 @@ route.post(
   authorizeDeliveryAgent,
   DeliveryAgentController.markDeliveredByDeliveryAgent
 )
+route.post('/deliveryAgents/addStaff', authorizeDeliveryAgent, DeliveryAgentController.addStaffWarehouse)
+
+route.patch('/deliveryAgents/updateStaffInfo', authorizeDeliveryAgent, DeliveryAgentController.updateStaffProfile)
 
 //--------------------STAFF TRANSACTION---------------//
 route.post('/staffTransactions/loginStaffTransaction', StaffTransactionPointController.loginStaffTransaction)
 
 route.get('/staffTransactions/getStaffs', authorize,StaffTransactionPointController.getAllStaffs)
 
+
+//----------------------STAFF WAREHOUSE---------------//
+
+route.get('/staffWarehouses/getStaffs', authorizeDeliveryAgent, StaffWarehouseController.getAllStaffs)
 
 module.exports = route

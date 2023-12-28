@@ -10,9 +10,9 @@ import { PieChart } from 'react-minimal-pie-chart'
 
 const Dashboard = () => {
   const couriers = useSelector((state) => state.courier.couriers)
-  const depId = useSelector((state) => state.auth.department._id)
-  
-  
+  const depId = useSelector((state) => state.auth.staffTransaction.transactionPointId)
+  // return depId
+  // const depId = '6588297d3d06a049c547b9c1'
   function getRecentUpdates() {
     const updates = []
     couriers.map((courier, index) => {

@@ -21,9 +21,9 @@ function authorizeToken(req, res, next) {
         data: {},
       })
     }
-    if(departmentInfo!=null){
-      console.log(departmentInfo)
-    }
+    // if(departmentInfo!=null){
+    //   console.log(departmentInfo)
+    // }
     req.department = departmentInfo
     next()
   })
