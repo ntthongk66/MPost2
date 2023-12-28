@@ -5,6 +5,7 @@ const initState = {
   deliveryAgent: null,
   staffTransaction: null,
   staffWarehouse: null,
+  admin: null
 }
 
 const authReducer = (state = initState, action) => {
@@ -18,6 +19,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'LOGIN_SUCCESS':
       return {
@@ -28,6 +30,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
 
     case 'DELIVERY_AGENT_LOGIN_SUCCESS':
@@ -39,6 +42,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: action.payload.deliveryAgent,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'STAFF_TRANSACTION_LOGIN_SUCCESS':
       return {
@@ -49,6 +53,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: action.payload.staffTransaction,
         staffWarehouse: null,
+        admin: null,
       }
     case 'STAFF_WAREHOUSE_LOGIN_SUCCESS':
       return {
@@ -59,7 +64,20 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: action.payload.staffWarehouse,
-        
+        admin: null,
+
+      }
+    case 'ADMIN_LOGIN_SUCCESS':
+      return {
+        ...state,
+        accessToken: action.payload.accessToken, //.accesToken
+        error: null,
+        department: null,
+        deliveryAgent: null,
+        staffTransaction: null,
+        staffWarehouse: null,
+        admin: action.payload.admin,
+
       }
     case 'DEPARTMENT_NOT_FOUND':
       return {
@@ -70,6 +88,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'DELIVERYAGENT_NOT_FOUND':
       return {
@@ -80,6 +99,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'STAFF_NOT_FOUND':
       return {
@@ -90,6 +110,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'STAFF_WAREHOUSE_NOT_FOUND':
       return {
@@ -100,6 +121,18 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
+      }
+    case 'ADMIN_NOT_FOUND':
+      return {
+        ...state,
+        error: 'No admin found with the given email or password',
+        accessToken: null,
+        department: null,
+        deliveryAgent: null,
+        staffTransaction: null,
+        staffWarehouse: null,
+        admin: null,
       }
 
     case 'INVALID_PASSWORD':
@@ -111,6 +144,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'REGISTER_REQUEST_ERROR':
       return {
@@ -121,6 +155,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'REGISTER_SUCCESS':
       return {
@@ -131,6 +166,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
 
     case 'REGISTER_FAILURE':
@@ -142,6 +178,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'UNAUTHORIZED':
       return {
@@ -151,6 +188,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'INVALID_ACCESS_TOKEN':
       return {
@@ -160,6 +198,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'PROFILE_FETCH_SUCCESS':
       return {
@@ -169,6 +208,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'PROFILE_FETCH_ERROR':
       return {
@@ -178,6 +218,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
     case 'PROFILE_UPDATE_SUCCESS':
       return {
@@ -187,6 +228,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
 
     case 'LOGOUT':
@@ -198,6 +240,7 @@ const authReducer = (state = initState, action) => {
         deliveryAgent: null,
         staffTransaction: null,
         staffWarehouse: null,
+        admin: null,
       }
 
 

@@ -5,11 +5,13 @@ const CourierController = require('../controllers/courierController')
 const DeliveryAgentController = require('../controllers/deliveryAgentController')
 const StaffTransactionPointController = require('../controllers/staffTransactionPointController')
 const StaffWarehouseController = require('../controllers/staffWarehouseController')
+const AdminController = require('../controllers/adminController')
 
 const {
   authorize,
   authorizeDeliveryAgent,
   authorizeStaffTransaction,
+  authorizeAdmin,
 } = require('../middleware/authorizationMiddleware')
 
 route.get('/', (req, res) => {
@@ -82,5 +84,20 @@ route.get('/staffTransactions/getStaffs', authorize,StaffTransactionPointControl
 route.get('/staffWarehouses/getStaffs', authorizeDeliveryAgent, StaffWarehouseController.getAllStaffs)
 
 route.post('/staffWarehouses/loginStaffWarehouse', StaffWarehouseController.loginStaffWarehouse)
+
+//-----------------------ADMIN-------------//
+
+route.post('/admin/loginAdmin', AdminController.loginAdmin)
+route.get('/admin/getDepartments', authorizeAdmin,AdminController.getAllDepartment)
+
+route.patch('/admin/updateDepartments', authorizeAdmin, AdminController.updateDepartmentProfile)
+
+route.post('/admin/addDepartment', authorizeAdmin, AdminController.addDepartment)
+
+route.get('/admin/getDeliveryAgents', authorizeAdmin,AdminController.getAllDeliveryAgent)
+
+route.patch('/admin/updateDeliveryAgents', authorizeAdmin, AdminController.updateDeliveryAgentProfile)
+
+route.post('/admin/addDeliveryAgent', authorizeAdmin, AdminController.addDeliveryAgent)
 
 module.exports = route

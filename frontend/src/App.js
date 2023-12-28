@@ -5,6 +5,7 @@ import DepartmentMain from './components/DepartmentMain'
 import DeliveryAgentMain from './components/DeliveryAgentMain'
 import StaffTransactionMain from './components/StaffTransactionMain'
 import StaffWarehouseMain from './components/StaffWarehouseMain'
+import AdminMain from './components/AdminMain'
 
 function App() {
   const state = useSelector((state) => state)
@@ -19,6 +20,8 @@ function App() {
         <StaffTransactionMain />
       ) : state.auth.staffWarehouse != null ? (
         <StaffWarehouseMain />
+      ) : state.auth.admin != null ? (
+        <AdminMain />
       ) : (
         <DepartmentMain />
       )}
