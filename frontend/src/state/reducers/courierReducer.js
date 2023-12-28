@@ -12,6 +12,13 @@ const courierReducer = (state = initState, action) => {
         error: null,
       }
 
+    case 'COURIERS_WH_FETCHED_SUCCESSFULLY':
+      return {
+        ...state,
+        couriers: action.payload,
+        error: null,
+      }
+
     case 'COURIERS_FETCH_ERROR':
       return {
         ...state,

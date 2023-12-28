@@ -44,6 +44,13 @@ route.patch(
   authorize,
   CourierController.updateCourierEntry
 )
+route.get('/couriers/getCouriersWh', authorizeDeliveryAgent, CourierController.getAllCouriersWh)
+
+route.patch(
+  '/couriers/updateCourierWh',
+  authorizeDeliveryAgent,
+  CourierController.updateCourierEntryWh
+)
 
 //----------------- DELIVERY AGENT APIS -------------------------//
 route.post(
@@ -73,5 +80,7 @@ route.get('/staffTransactions/getStaffs', authorize,StaffTransactionPointControl
 //----------------------STAFF WAREHOUSE---------------//
 
 route.get('/staffWarehouses/getStaffs', authorizeDeliveryAgent, StaffWarehouseController.getAllStaffs)
+
+route.post('/staffWarehouses/loginStaffWarehouse', StaffWarehouseController.loginStaffWarehouse)
 
 module.exports = route

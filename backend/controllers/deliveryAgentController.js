@@ -274,6 +274,37 @@ async function updateStaffProfile(req, res) {
   }
 }
 
+/*
+@ method: get
+@ desc: get all couriers for a department
+@ access: private
+*/
+async function getAllCouriers(req, res) {
+  try {
+    var warehouseId = req.deliveryAgent._id
+    var allCouriers = await Courier.find()
+      .populate('senderDetails')
+      .populate('receiverDetails')
+
+    const resultingAllWarehouseCouriers = []
+
+    for (const courier of allCouriers) {
+      if (Object.values(courier.tracker).includes(departmentId)) {
+        resultingAllWarehouseCouriers.push(courier)
+      }
+    }
+
+    return res.status(200).json({
+      status: 'success',
+      message: 'Couriers Fetched Successful',
+      data: resultingAllWarehouseCouriers.reverse(),
+    })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({ message: 'Something went wrong !' })
+  }
+}
+
 
 module.exports = {
   loginDeliveryAgent,

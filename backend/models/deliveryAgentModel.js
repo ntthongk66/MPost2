@@ -17,6 +17,10 @@ const deliveryAgentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  pinCode: {
+    type: Number,
+    required: true
+  },
 })
 
 module.exports = mongoose.model('DeliveryAgent', deliveryAgentSchema)

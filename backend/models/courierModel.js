@@ -11,6 +11,24 @@ const courierSchema = new mongoose.Schema({
     required: true,
     ref: 'Customer',
   },
+
+  sendWhStatus: {
+    type: String,
+    required: false,
+  },
+  recieveWhStatus: {
+    type: String,
+    required: false,
+  },
+  sendDepStatus: {
+    type: String,
+    required: false,
+  },
+  recieveDepStatus: {
+    type: String,
+    required: false,
+  },
+  
   packageName: {
     type: String,
     required: true,

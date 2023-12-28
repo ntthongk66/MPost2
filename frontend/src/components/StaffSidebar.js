@@ -44,14 +44,15 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 
 const StaffSidebar = () => {
   const staffTransaction = useSelector((state) => state.auth.staffTransaction)
-  const deliveryAgent = useSelector((state) => state.auth.deliveryAgent)
+  const staffWarehouse = useSelector((state) => state.auth.staffWarehouse)
+  // const deliveryAgent = useSelector((state) => state.auth.deliveryAgent)
   const currentLoc = useLocation().pathname.split('/')[1]
 
   const [selected, setSelected] = useState(
     currentLoc === 'auth'
-      ? deliveryAgent == null
+      ? staffTransaction == null
         ? 'dashboard'
-        : 'pickup'
+        : 'waiting'
       : currentLoc
   )
 
@@ -108,21 +109,21 @@ const StaffSidebar = () => {
                   fontWeight='bold'
                   sx={{ m: '10px 0 0 0', color: 'black' }}
                 >
-                  {deliveryAgent ? deliveryAgent.name : `Staff name # ${staffTransaction.name}`}
+                  {staffWarehouse ? staffWarehouse.name : `Staff name # ${staffTransaction.name}`}
                 </Typography>
                 <Typography>
-                  {deliveryAgent
-                    ? `Phone Number # ${deliveryAgent.phoneNumber}`
+                  {staffWarehouse
+                    ? `Phone Number # ${staffWarehouse.phoneNumber}`
                     : `Phone Number # ${staffTransaction.phoneNumber}`}
                 </Typography>
               </Box>
             </Box>
-            {deliveryAgent ? (
+            {staffWarehouse ? (
               <Box>
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
-                    title='pickup'
-                    to='/pickup'
+                    title='Waiting'
+                    to='/staffWarehouse/waiting'
                     icon={<AppRegistrationOutlinedIcon />}
                     selected={selected}
                     setSelected={setSelected}
@@ -130,8 +131,8 @@ const StaffSidebar = () => {
                 </Box>
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
-                    title='deliver'
-                    to='/deliver'
+                    title='accepted'
+                    to='/staffWarehouse/accepted'
                     icon={<DeliveryDiningOutlinedIcon />}
                     selected={selected}
                     setSelected={setSelected}
