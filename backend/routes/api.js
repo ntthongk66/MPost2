@@ -81,4 +81,6 @@ route.get('/staffTransactions/getStaffs', authorize,StaffTransactionPointControl
 
 route.get('/staffWarehouses/getStaffs', authorizeDeliveryAgent, StaffWarehouseController.getAllStaffs)
 
+route.post('/staffWarehouses/loginStaffWarehouse', StaffWarehouseController.loginStaffWarehouse)
+
 module.exports = route

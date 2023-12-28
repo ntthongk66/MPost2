@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import Deliver from './views/deliveryagent/Deliver'
-
+import Dashboard from './views/deliveryagent/Dashboard'
 import Pickup from './views/deliveryagent/Pickup'
 import Staffs from './views/deliveryagent/staff'
 import { getAllStaffs } from '../state/actions/staffWarehouseAction'
@@ -33,6 +33,7 @@ function DeliveryAgentMain() {
             <Route exact path='/pickup' element={<Pickup />} />
             <Route exact path='/deliver' element={<Deliver />} />
             <Route exact path='/staffWH' element={<Staffs />} />
+            <Route exact path='/dashboardWh' element={<Dashboard />} />
 
             <Route exact path='/courierWaiting' element={<CouriersWaiting />} />
             <Route exact path='/courierAccepted' element={<CouriersAccepted />} />

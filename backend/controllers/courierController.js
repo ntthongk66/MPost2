@@ -269,6 +269,8 @@ async function getTrackingDetails(req, res) {
 async function updateCourierEntryWh(req, res) {
   try {
     const warehouseId = req.deliveryAgent._id // this is the id of loggedin department who is currently making the entry of this courier to their department (can be initiator as well as middle ones)
+
+    console.log(req)
     if (!warehouseId) {
       return res.status(403).json({
         status: 'failure',
@@ -353,10 +355,12 @@ async function updateCourierEntryWh(req, res) {
 */
 async function getAllCouriersWh(req, res) {
   try {
+    // console.log(req)
     var warehouseId = req.deliveryAgent._id
     const warehouse = await DeliveryAgent.findById(warehouseId)
     const warehousePinCode = warehouse.pinCode
 
+    console.log(warehouseId)
     var allCouriers = await Courier.find()
       .populate('senderDetails')
       .populate('receiverDetails')

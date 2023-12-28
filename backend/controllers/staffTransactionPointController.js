@@ -61,35 +61,6 @@ async function loginStaffTransaction(req, res) {
   }
 }
 
-/*
-@ method: get
-@ desc: get frofile of staffs 
-@ access: private
-*/
-async function getDepartmentProfile(req, res) {
-  try {
-    const departmentId = req.department._id
-    const department = await Department.findById(departmentId).select(
-      '-password'
-    )
-    if (department) {
-      return res.status(200).json({
-        status: 'success',
-        message: 'Department found successfully',
-        data: department,
-      })
-    }
-
-    return res.status(404).json({
-      status: 'failure',
-      message: 'Department not found',
-      data: {},
-    })
-  } catch (error) {
-    return new Error(error.message)
-  }
-}
-
 
 /*
 @ method: get

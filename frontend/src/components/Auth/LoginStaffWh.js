@@ -8,13 +8,13 @@ import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { loginStaffTransaction } from '../../state/actions/authActions'
+import { loginStaffWarehouse } from '../../state/actions/authActions'
 import { Link } from 'react-router-dom'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-function LoginStaffTransaction() {
+function LoginStaffWarehouse() {
 	const auth = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const handleLogin = (event) => {
@@ -28,13 +28,13 @@ function LoginStaffTransaction() {
 			password: password,
 		}
 
-		dispatch(loginStaffTransaction(credentials))
+		dispatch(loginStaffWarehouse(credentials))
 	}
 
 	return (
 		<Box>
 			<Box display={'flex'} justifyContent='end' marginRight={3}>
-				<Link to='/auth/staffWarehouse'>
+				<Link to='/auth/staffTransaction'>
 					<Button
 						variant='contained'
 						sx={{
@@ -44,7 +44,7 @@ function LoginStaffTransaction() {
 							backgroundColor: 'black',
 						}}
 					>
-						I'm a warehouse staff
+						I'm a staff transaction 
 					</Button>
 				</Link>
 				<Link to="/track/courier" style={{ textDecoration: 'none' }}>
@@ -155,4 +155,4 @@ function LoginStaffTransaction() {
 	)
 }
 
-export default LoginStaffTransaction
+export default LoginStaffWarehouse

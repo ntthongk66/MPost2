@@ -10,6 +10,7 @@ import { Link, Navigate, Route, Routes } from 'react-router-dom'
 import Track from '../views/department/Track'
 import LoginDeliveryAgent from './LoginDeliveryAgent'
 import LoginStaffTransaction from './LoginStaff'
+import LoginStaffWarehouse from './LoginStaffWh'
 
 const Auth = () => {
   const auth = useSelector((state) => state.auth)
@@ -104,6 +105,7 @@ const Auth = () => {
         <Route exact path='/track/courier' element={<Track />} />
 
         <Route exact path='auth/staffTransaction' element={<LoginStaffTransaction/>}/>
+        <Route exact path='auth/staffWarehouse' element={<LoginStaffWarehouse/>}/>
 
         <Route path='*' element={<Navigate to='/auth' replace />} />
       </Routes>
