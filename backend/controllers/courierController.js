@@ -296,10 +296,30 @@ async function updateCourierEntryWh(req, res) {
           recieveWhStatus: "Waiting",
         })
       } else if (courier.sendWhStatus == "Accepted" && courier.recieveWhStatus == "Waiting") {
-        await Courier.findByIdAndUpdate(courierDetails._id, {
-          sendWhStatus: "Accepted",
-          recieveWhStatus: "Accepted",
+        recieveDepPincode = courier.receiverDetails.pincode
+        const department = await Department.findOne({
+          pinCode: recieveDepPincode
         })
+        console.log(courier.receiverDetails)
+        if (department) {
+
+          const departmentId = department._id
+          var getDate = Date.now().toString()
+          courier.tracker[getDate] = departmentId.toString()
+          courier.departmentStatus[department._id] = "Waiting"
+          const midStatus = `Package arrived at ${department.name}, ${department.location}, ${department.city}`
+
+
+          await Courier.findByIdAndUpdate(courierDetails._id, {
+            tracker: courier.tracker,
+            recieveDepStatus: "Waiting",
+            departmentStatus: courier.departmentStatus,
+            status: midStatus,
+            sendWhStatus: "Accepted",
+            recieveWhStatus: "Accepted",
+            updatedAt: Date.now(),
+          })
+        }
       } else if (courier.sendWhStatus == "Accepted" && courier.recieveWhStatus == "Accepted") {
         recieveDepPincode = courier.receiverDetails.pincode
 

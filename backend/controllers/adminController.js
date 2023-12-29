@@ -123,6 +123,7 @@ async function updateDepartmentProfile(req, res) {
 				city: departmentDetails.city,
 				state: departmentDetails.state,
 				pinCode: departmentDetails.pinCode,
+				
 
 			})
 
@@ -180,6 +181,9 @@ async function addDepartment(req, res) {
       state: req.body.departmentDetails.state,
       pinCode: req.body.departmentDetails.pinCode,
       country: req.body.departmentDetails.country,
+	  accepted:req.body.departmentDetails.accepted,
+	  refused: req.body.departmentDetails.refused,
+	  dispatch: req.body.departmentDetails.dispatch,
     })
 
 		console.log(req)

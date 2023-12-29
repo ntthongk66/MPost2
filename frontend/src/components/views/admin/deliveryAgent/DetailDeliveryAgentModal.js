@@ -54,24 +54,14 @@ function UserCard({ customer }) {
 		<Card>
 			<CardContent>
 				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Name
+					Waiting Courier:
 				</Typography>
-				<Typography component='div'>{customer.name}</Typography>
+				<Typography component='div'>1</Typography>
 				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Email
+					Accepted Courier:
 				</Typography>
-				<Typography component='div'>{customer.email}</Typography>
-				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Phone
-				</Typography>
-				<Typography component='div'>{customer.phoneNumber}</Typography>
-				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Address
-				</Typography>
-				<Typography component='div'>
-					{customer.location}, {customer.city}, {customer.state},{' '}
-					{customer.country}, {customer.pincode}
-				</Typography>
+				<Typography component='div'>1</Typography>
+				
 			</CardContent>
 		</Card>
 	)
@@ -209,7 +199,7 @@ const DeliveryAgentDetailModal = (props) => {
 	return (
 		<div>
 			<Dialog open={props.modalOpen} onClose={props.handleModalClose}>
-				<DialogTitle>Department Details</DialogTitle>
+				<DialogTitle>Warehouse Details</DialogTitle>
 				<Box>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs value={value} onChange={handleTabChange} centered>
@@ -217,8 +207,8 @@ const DeliveryAgentDetailModal = (props) => {
 								label='Warehouse Details'
 								{...additionalTabWiseAttributes(0)}
 							/>
-							{/* <Tab label='Sender Details' {...additionalTabWiseAttributes(1)} />
-							<Tab
+							<Tab label='Statistic' {...additionalTabWiseAttributes(1)} />
+							{/* <Tab
 								label='Receiver Details'
 								{...additionalTabWiseAttributes(2)}
 							/> */}
@@ -411,10 +401,10 @@ const DeliveryAgentDetailModal = (props) => {
 							</Box>
 						</Box>
 					</TabPanel>
-					{/* <TabPanel value={value} index={1}>
-						<UserCard customer={props.data && props.data.sender} />
+					<TabPanel value={value} index={1}>
+						<UserCard customer={props.data} />
 					</TabPanel>
-					<TabPanel value={value} index={2}>
+					{/* <TabPanel value={value} index={2}>
 						<UserCard customer={props.data && props.data.receiver} />
 					</TabPanel> */}
 				</Box>

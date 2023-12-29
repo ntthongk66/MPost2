@@ -298,7 +298,7 @@ const NewStaffModal = (props) => {
   return (
     <div>
       <Dialog open={props.modalOpen} onClose={props.handleModalClose}>
-        <DialogTitle>Add Staff</DialogTitle>
+        <DialogTitle>Add Staff (Transaction staff)</DialogTitle>
         <Box>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={value} onChange={handleTabChange} centered>
@@ -419,9 +419,9 @@ const NewStaffModal = (props) => {
                     />
                   </Box>
 
-                  <Typography sx={{ backgroundColor: 'yellow' }} mt={2}>
+                  {/* <Typography sx={{ backgroundColor: 'yellow' }} mt={2}>
                     Receiver's Details
-                  </Typography>
+                  </Typography> */}
                   <Box
                     display='grid'
                     gap='30px'

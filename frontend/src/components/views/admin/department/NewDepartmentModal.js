@@ -142,6 +142,9 @@ const NewDepartmentModal = (props) => {
 				state: formData.state,
 				pinCode: formData.pinCode,
 				country: formData.country,
+				accepted: "0",
+				refused: "0",
+				dispatch: "0",
 			},
 		}
 		try {
@@ -303,7 +306,7 @@ const NewDepartmentModal = (props) => {
 	return (
 		<div>
 			<Dialog open={props.modalOpen} onClose={props.handleModalClose}>
-				<DialogTitle>Add Staff</DialogTitle>
+				<DialogTitle>Add New</DialogTitle>
 				<Box>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs value={value} onChange={handleTabChange} centered>
@@ -312,7 +315,7 @@ const NewDepartmentModal = (props) => {
                 {...additionalTabWiseAttributes(0)}
               /> */}
 							<Tab
-								label='Add new Department'
+								label='Add new Department management'
 								{...additionalTabWiseAttributes(0)}
 							/>
 						</Tabs>
@@ -400,7 +403,7 @@ const NewDepartmentModal = (props) => {
 											fullWidth
 											variant='standard'
 											type='text'
-											label='Deparment Name'
+											label='Department Name'
 											onBlur={handleBlur}
 											onChange={handleChange}
 											name='name'

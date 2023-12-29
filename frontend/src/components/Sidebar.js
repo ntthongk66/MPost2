@@ -10,6 +10,8 @@ import { Box, Typography } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 import 'react-pro-sidebar/dist/css/styles.css'
 import HomeIcon from '@mui/icons-material/Home'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
@@ -91,7 +93,7 @@ const Sidebar = () => {
                   variant='h5'
                   style={{ color: 'black', fontWeight: 'bold' }}
                 >
-                  MagicPost
+                  Magic Post
                 </Typography>
                 <img
                   src="https://png.pngtree.com/png-clipart/20211128/original/pngtree-courier-logo-png-image_6952321.png"
@@ -119,7 +121,7 @@ const Sidebar = () => {
             </Box>
             {deliveryAgent ? (
               <Box>
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                {/* <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='pickup'
                     to='/pickup'
@@ -127,8 +129,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                </Box>
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                </Box> */}
+                {/* <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='deliver'
                     to='/deliver'
@@ -136,12 +138,12 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                </Box>
+                </Box> */}
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='Dashboard'
                     to='/dashboardWh'
-                    icon={<LocalShippingOutlinedIcon />}
+                    icon={<HomeIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
@@ -150,7 +152,7 @@ const Sidebar = () => {
                   <Item
                     title='Waiting'
                     to='/courierWaiting'
-                    icon={<LocalShippingOutlinedIcon />}
+                    icon={<HourglassBottomIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
@@ -159,7 +161,7 @@ const Sidebar = () => {
                   <Item
                     title='Accepted'
                     to='/courierAccepted'
-                    icon={<LocalShippingOutlinedIcon />}
+                    icon={<CheckCircleOutlineIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
@@ -196,7 +198,7 @@ const Sidebar = () => {
                   />
                 </Box>
 
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                {/* <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='couriers'
                     to='/couriers'
@@ -204,7 +206,7 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                </Box>
+                </Box> */}
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='track'

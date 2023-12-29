@@ -94,7 +94,7 @@ function LoginAdmin() {
 									id='loginText'
 									style={{ fontSize: '20pt', fontWeight: 'bold' }}
 								>
-									Hey! Welcome
+									Welcome Admin!
 								</div>
 								<div style={{ color: 'grey', fontSize: '10pt' }}>
 									Login to deliver with ease
