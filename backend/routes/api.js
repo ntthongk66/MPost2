@@ -36,6 +36,8 @@ route.post('/departments/addStaff', authorize,DepartmentController.addStaffTrans
 
 route.patch('/departments/updateStaffInfo', authorize, DepartmentController.updateStaffProfile)
 
+route.delete('/departments/deleteStaffTransactionPoint', authorize, DepartmentController.deleteStaffTransactionPoint)
+
 //------------------- COURIER APIS ------------------------------//
 route.post('/couriers/addCourier', authorize, CourierController.addCourierEntry)
 route.get('/couriers/getCouriers', authorize, CourierController.getAllCouriers)
@@ -53,6 +55,8 @@ route.patch(
   authorizeDeliveryAgent,
   CourierController.updateCourierEntryWh
 )
+
+route.delete('/couriers/deleteCourier', authorizeDeliveryAgent, CourierController.deleteCourier)
 
 //----------------- DELIVERY AGENT APIS -------------------------//
 route.post(
@@ -73,6 +77,8 @@ route.post('/deliveryAgents/addStaff', authorizeDeliveryAgent, DeliveryAgentCont
 
 route.patch('/deliveryAgents/updateStaffInfo', authorizeDeliveryAgent, DeliveryAgentController.updateStaffProfile)
 
+route.delete('/deliveryAgents/deleteStaffWarehouse', authorizeDeliveryAgent, DeliveryAgentController.deleteStaffWarehouse)
+
 //--------------------STAFF TRANSACTION---------------//
 route.post('/staffTransactions/loginStaffTransaction', StaffTransactionPointController.loginStaffTransaction)
 
@@ -90,11 +96,15 @@ route.post('/staffWarehouses/loginStaffWarehouse', StaffWarehouseController.logi
 route.post('/admin/loginAdmin', AdminController.loginAdmin)
 route.get('/admin/getDepartments', authorizeAdmin,AdminController.getAllDepartment)
 
+route.delete('/admin/deleteDepartment', authorizeAdmin, AdminController.deleteDepartment)
+
 route.patch('/admin/updateDepartments', authorizeAdmin, AdminController.updateDepartmentProfile)
 
 route.post('/admin/addDepartment', authorizeAdmin, AdminController.addDepartment)
 
 route.get('/admin/getDeliveryAgents', authorizeAdmin,AdminController.getAllDeliveryAgent)
+
+route.delete('/admin/deleteDeliveryAgent', authorizeAdmin, AdminController.deleteDeliveryAgent)
 
 route.patch('/admin/updateDeliveryAgents', authorizeAdmin, AdminController.updateDeliveryAgentProfile)
 

@@ -296,10 +296,30 @@ async function updateCourierEntryWh(req, res) {
           recieveWhStatus: "Waiting",
         })
       } else if (courier.sendWhStatus == "Accepted" && courier.recieveWhStatus == "Waiting") {
-        await Courier.findByIdAndUpdate(courierDetails._id, {
-          sendWhStatus: "Accepted",
-          recieveWhStatus: "Accepted",
+        recieveDepPincode = courier.receiverDetails.pincode
+        const department = await Department.findOne({
+          pinCode: recieveDepPincode
         })
+        console.log(courier.receiverDetails)
+        if (department) {
+
+          const departmentId = department._id
+          var getDate = Date.now().toString()
+          courier.tracker[getDate] = departmentId.toString()
+          courier.departmentStatus[department._id] = "Waiting"
+          const midStatus = `Package arrived at ${department.name}, ${department.location}, ${department.city}`
+
+
+          await Courier.findByIdAndUpdate(courierDetails._id, {
+            tracker: courier.tracker,
+            recieveDepStatus: "Waiting",
+            departmentStatus: courier.departmentStatus,
+            status: midStatus,
+            sendWhStatus: "Accepted",
+            recieveWhStatus: "Accepted",
+            updatedAt: Date.now(),
+          })
+        }
       } else if (courier.sendWhStatus == "Accepted" && courier.recieveWhStatus == "Accepted") {
         recieveDepPincode = courier.receiverDetails.pincode
 
@@ -448,6 +468,30 @@ async function updateCourierEntry(req, res) {
   }
 }
 
+async function deleteCourier (req, res) {
+	const courierDetails = req.body.courierDetails
+	const id = courierDetails._id
+	// alert(id)
+	await Courier.deleteOne({
+		_id: id
+	})
+	.then(data => {
+		res.status(201).json({
+			status: 'success',
+			message: 'Delete successfully!',
+			data: {}
+		})
+	})
+	.catch(error => {
+		console.log(error.message)
+		return res.status(500).json({ 
+			status: 'failure',
+			message: 'Something went wrong !',
+			data: {} 
+		})
+	})
+}
+
 module.exports = {
   addCourierEntry,
   getAllCouriers,
@@ -456,4 +500,5 @@ module.exports = {
   updateCourierEntry,
   getAllCouriersWh,
   updateCourierEntryWh,
+  deleteCourier
 }

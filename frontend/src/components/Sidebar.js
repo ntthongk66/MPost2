@@ -96,7 +96,7 @@ const Sidebar = () => {
                   Magic Post
                 </Typography>
                 <img
-                  src='https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png'
+                  src="https://png.pngtree.com/png-clipart/20211128/original/pngtree-courier-logo-png-image_6952321.png"
                   alt='Courier-Tn-M'
                   height={75}
                 />
@@ -121,7 +121,7 @@ const Sidebar = () => {
             </Box>
             {deliveryAgent ? (
               <Box>
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                {/* <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='pickup'
                     to='/pickup'
@@ -129,8 +129,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                </Box>
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                </Box> */}
+                {/* <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='deliver'
                     to='/deliver'
@@ -138,7 +138,7 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                </Box>
+                </Box> */}
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='Dashboard'

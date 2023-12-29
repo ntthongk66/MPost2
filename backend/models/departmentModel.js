@@ -44,6 +44,19 @@ const departmentSchema = new mongoose.Schema({
     required: true,
     default: 'India',
   },
+  accepted: {
+    type: String,
+    required: true,
+  },
+  refused: {
+    type: String,
+    required: true,
+  },
+  dispatch: {
+    type: String,
+    required: true,
+  },
+
 })
 
 module.exports = mongoose.model('Department', departmentSchema)

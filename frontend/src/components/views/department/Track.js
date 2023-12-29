@@ -64,8 +64,8 @@ const Track = () => {
         <Box mr='10px'>
           {!token && (
             <img
-              src='https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png'
-              alt='Courier-Tn-M'
+              src='https://png.pngtree.com/png-clipart/20211128/original/pngtree-courier-logo-png-image_6952321.png'
+              alt='MagicPost'
               height={75}
             />
           )}

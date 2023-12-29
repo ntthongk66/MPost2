@@ -123,6 +123,7 @@ async function updateDepartmentProfile(req, res) {
 				city: departmentDetails.city,
 				state: departmentDetails.state,
 				pinCode: departmentDetails.pinCode,
+				
 
 			})
 
@@ -180,6 +181,9 @@ async function addDepartment(req, res) {
       state: req.body.departmentDetails.state,
       pinCode: req.body.departmentDetails.pinCode,
       country: req.body.departmentDetails.country,
+	  accepted:req.body.departmentDetails.accepted,
+	  refused: req.body.departmentDetails.refused,
+	  dispatch: req.body.departmentDetails.dispatch,
     })
 
 		console.log(req)
@@ -196,6 +200,30 @@ async function addDepartment(req, res) {
   } catch (error) {
     return res.status(400).json({ message: error.message }) // 400 => invalid user inputs
   }
+}
+
+async function deleteDepartment (req, res) {
+	const departmentDetails = req.body.departmentDetails
+	const id = departmentDetails._id
+	// alert(id)
+	await Department.deleteOne({
+		_id: id
+	})
+	.then(data => {
+		res.status(201).json({
+			status: 'success',
+			message: 'Deleted successfully!',
+			data: {}
+		})
+	})
+	.catch(error => {
+		console.log(error.message)
+		return res.status(500).json({ 
+			status: 'failure',
+			message: 'Something went wrong !',
+			data: {} 
+		})
+	})
 }
 
 
@@ -280,6 +308,29 @@ async function updateDeliveryAgentProfile(req, res) {
 	}
 }
 
+async function deleteDeliveryAgent (req, res) {
+	const deliveryAgentDetails = req.body.deliveryAgentDetails
+	const id = deliveryAgentDetails._id
+	// alert(id)
+	await DeliveryAgent.deleteOne({
+		_id: id
+	})
+	.then(data => {
+		res.status(201).json({
+			status: 'success',
+			message: 'Delete successfully!',
+			data: {}
+		})
+	})
+	.catch(error => {
+		console.log(error.message)
+		return res.status(500).json({ 
+			status: 'failure',
+			message: 'Something went wrong !',
+			data: {} 
+		})
+	})
+}
 
 async function addDeliveryAgent(req, res) {
   try {
@@ -344,8 +395,10 @@ module.exports = {
 	loginAdmin,
 	getAllDepartment,
 	updateDepartmentProfile,
+	deleteDepartment,
 	addDepartment,
 	getAllDeliveryAgent,
 	updateDeliveryAgentProfile,
+	deleteDeliveryAgent,
 	addDeliveryAgent,
 }

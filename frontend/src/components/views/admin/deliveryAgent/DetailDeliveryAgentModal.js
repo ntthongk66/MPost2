@@ -54,24 +54,14 @@ function UserCard({ customer }) {
 		<Card>
 			<CardContent>
 				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Name
+					Waiting Courier:
 				</Typography>
-				<Typography component='div'>{customer.name}</Typography>
+				<Typography component='div'>1</Typography>
 				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Email
+					Accepted Courier:
 				</Typography>
-				<Typography component='div'>{customer.email}</Typography>
-				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Phone
-				</Typography>
-				<Typography component='div'>{customer.phoneNumber}</Typography>
-				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Address
-				</Typography>
-				<Typography component='div'>
-					{customer.location}, {customer.city}, {customer.state},{' '}
-					{customer.country}, {customer.pincode}
-				</Typography>
+				<Typography component='div'>1</Typography>
+				
 			</CardContent>
 		</Card>
 	)
@@ -143,6 +133,52 @@ const DeliveryAgentDetailModal = (props) => {
 					theme: 'light',
 				})
 			} else {
+				// toast.error('Something went wrong !', {
+				// 	position: 'top-right',
+				// 	autoClose: 5000,
+				// 	hideProgressBar: false,
+				// 	closeOnClick: true,
+				// 	pauseOnHover: true,
+				// 	draggable: true,
+				// 	progress: undefined,
+				// 	theme: 'light',
+				// })
+			}
+		} catch (error) {
+			console.log(error)
+		}
+		props.handleModalClose()
+	}
+
+	const handleDeleteDeliveryAgent = async () => {
+		const data = {
+			deliveryAgentDetails: { _id: props.data.id }
+		}
+		try {
+			const url = `${apiHost}/api/admin/deleteDeliveryAgent`
+			const response = await fetch(url, {
+				method: 'delete',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${auth.accessToken}`,
+				},
+			})
+
+			// const courierUpdateResponse = await response.json()
+
+			if (response.status === 201) {
+				toast.success('Deleted Successfully', {
+					position: 'top-right',
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: 'light',
+				})
+			} else {
 				toast.error('Something went wrong !', {
 					position: 'top-right',
 					autoClose: 5000,
@@ -171,8 +207,8 @@ const DeliveryAgentDetailModal = (props) => {
 								label='Warehouse Details'
 								{...additionalTabWiseAttributes(0)}
 							/>
-							{/* <Tab label='Sender Details' {...additionalTabWiseAttributes(1)} />
-							<Tab
+							<Tab label='Statistic' {...additionalTabWiseAttributes(1)} />
+							{/* <Tab
 								label='Receiver Details'
 								{...additionalTabWiseAttributes(2)}
 							/> */}
@@ -333,6 +369,20 @@ const DeliveryAgentDetailModal = (props) => {
 											</Box>
 
 											<Box display='flex' justifyContent='end' mt='20px'>
+
+												<Button
+													type='text'
+													variant='contained'
+													onClick={handleDeleteDeliveryAgent}
+													sx={{
+														color: 'white',
+														backgroundColor: 'black',
+														borderRadius: '20px',
+													}}
+												>
+													Delete
+												</Button>
+
 												<Button
 													type='submit'
 													variant='contained'
@@ -351,10 +401,10 @@ const DeliveryAgentDetailModal = (props) => {
 							</Box>
 						</Box>
 					</TabPanel>
-					{/* <TabPanel value={value} index={1}>
-						<UserCard customer={props.data && props.data.sender} />
+					<TabPanel value={value} index={1}>
+						<UserCard customer={props.data} />
 					</TabPanel>
-					<TabPanel value={value} index={2}>
+					{/* <TabPanel value={value} index={2}>
 						<UserCard customer={props.data && props.data.receiver} />
 					</TabPanel> */}
 				</Box>

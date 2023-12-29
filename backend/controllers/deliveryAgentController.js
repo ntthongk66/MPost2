@@ -309,6 +309,29 @@ async function getAllCouriers(req, res) {
   }
 }
 
+async function deleteStaffWarehouse (req, res) {
+	const staffWarehouseDetails = req.body.staffWarehouseDetails
+	const id = staffWarehouseDetails._id
+	// alert(id)
+	await StaffWarehouse.deleteOne({
+		_id: id
+	})
+	.then(data => {
+		res.status(201).json({
+			status: 'success',
+			message: 'Delete successfully!',
+			data: {}
+		})
+	})
+	.catch(error => {
+		console.log(error.message)
+		return res.status(500).json({ 
+			status: 'failure',
+			message: 'Something went wrong !',
+			data: {} 
+		})
+	})
+}
 
 module.exports = {
   loginDeliveryAgent,
@@ -316,4 +339,5 @@ module.exports = {
   markDeliveredByDeliveryAgent,
   addStaffWarehouse,
   updateStaffProfile,
+  deleteStaffWarehouse
 }

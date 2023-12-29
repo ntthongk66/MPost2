@@ -49,29 +49,23 @@ function additionalTabWiseAttributes(index) {
 	}
 }
 
-function UserCard({ customer }) {
+function UserCard( department ) {
 	return (
 		<Card>
 			<CardContent>
 				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Name
+					Accepted Couriers
 				</Typography>
-				<Typography component='div'>{customer.name}</Typography>
+				<Typography component='div'>2</Typography>
 				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Email
+					Dispatch Couriers: 
 				</Typography>
-				<Typography component='div'>{customer.email}</Typography>
+				<Typography component='div'>1</Typography>
 				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Phone
+					Refused Couriers:
 				</Typography>
-				<Typography component='div'>{customer.phoneNumber}</Typography>
-				<Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-					Address
-				</Typography>
-				<Typography component='div'>
-					{customer.location}, {customer.city}, {customer.state},{' '}
-					{customer.country}, {customer.pincode}
-				</Typography>
+				<Typography component='div'>0</Typography>
+				
 			</CardContent>
 		</Card>
 	)
@@ -101,6 +95,12 @@ const DepartmentDetailModal = (props) => {
 		state: props.data && props.data.state,
 		pinCode: props.data && props.data.pinCode,
 		// status: props.data && props.data.status[`${depId}`],
+	}
+
+	const staticValues = {
+		accepted: props.data && props.data.accepted,
+		dispatch: props.data && props.data.dispatch,
+		refused: props.data && props.data.refused,
 	}
 
 	const editDepartmentSchema = yup.object().shape({
@@ -143,6 +143,52 @@ const DepartmentDetailModal = (props) => {
 					theme: 'light',
 				})
 			} else {
+				// toast.error('Something went wrong !', {
+				// 	position: 'top-right',
+				// 	autoClose: 5000,
+				// 	hideProgressBar: false,
+				// 	closeOnClick: true,
+				// 	pauseOnHover: true,
+				// 	draggable: true,
+				// 	progress: undefined,
+				// 	theme: 'light',
+				// })
+			}
+		} catch (error) {
+			console.log(error)
+		}
+		props.handleModalClose()
+	}
+	
+	const handleDeleteDepartment = async () => {
+		const data = {
+			departmentDetails: { _id: props.data.id },
+		}
+		try {
+			const url = `${apiHost}/api/admin/deleteDepartment`
+			const response = await fetch(url, {
+				method: 'delete',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${auth.accessToken}`,
+				},
+			})
+
+			// const courierUpdateResponse = await response.json()
+
+			if (response.status === 201) {
+				toast.success('Deleted Successfully', {
+					position: 'top-right',
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: 'light',
+				})
+			} else {
 				toast.error('Something went wrong !', {
 					position: 'top-right',
 					autoClose: 5000,
@@ -171,8 +217,8 @@ const DepartmentDetailModal = (props) => {
 								label='Department Details'
 								{...additionalTabWiseAttributes(0)}
 							/>
-							{/* <Tab label='Sender Details' {...additionalTabWiseAttributes(1)} />
-							<Tab
+							<Tab label='Statistic' {...additionalTabWiseAttributes(1)} />
+							{/* <Tab
 								label='Receiver Details'
 								{...additionalTabWiseAttributes(2)}
 							/> */}
@@ -333,6 +379,20 @@ const DepartmentDetailModal = (props) => {
 											</Box>
 
 											<Box display='flex' justifyContent='end' mt='20px'>
+
+												<Button
+													type='text'
+													onClick={handleDeleteDepartment}
+													variant='contained'
+													sx={{
+														color: 'white',
+														backgroundColor: 'black',
+														borderRadius: '20px',
+													}}
+												>
+													Delete
+												</Button>
+
 												<Button
 													type='submit'
 													variant='contained'
@@ -344,6 +404,7 @@ const DepartmentDetailModal = (props) => {
 												>
 													Update
 												</Button>
+
 											</Box>
 										</form>
 									)}
@@ -351,10 +412,10 @@ const DepartmentDetailModal = (props) => {
 							</Box>
 						</Box>
 					</TabPanel>
-					{/* <TabPanel value={value} index={1}>
-						<UserCard customer={props.data && props.data.sender} />
+					<TabPanel value={value} index={1}>
+						<UserCard department= {props.data} />
 					</TabPanel>
-					<TabPanel value={value} index={2}>
+					{/* <TabPanel value={value} index={2}>
 						<UserCard customer={props.data && props.data.receiver} />
 					</TabPanel> */}
 				</Box>

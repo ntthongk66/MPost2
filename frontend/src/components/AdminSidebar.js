@@ -15,6 +15,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import ShareLocationOutlinedIcon from '@mui/icons-material/ShareLocationOutlined'
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined'
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import DeliveryDiningOutlinedIcon from '@mui/icons-material/DeliveryDiningOutlined'
 import PeopleAlt from '@mui/icons-material/PeopleAlt'
 import WarehouseIcon from '@mui/icons-material/Warehouse';
@@ -95,8 +96,8 @@ const Sidebar = () => {
 									Magic Post
 								</Typography>
 								<img
-									src='https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png'
-									alt='Courier-Tn-M'
+									src="https://png.pngtree.com/png-clipart/20211128/original/pngtree-courier-logo-png-image_6952321.png"
+									alt='MagicPost'
 									height={75}
 								/>
 							</Box>
@@ -124,7 +125,7 @@ const Sidebar = () => {
 									<Item
 										title='Departments'
 										to='/admin/departments'
-										icon={<DeliveryDiningOutlinedIcon />}
+										icon={<HomeWorkIcon />}
 										selected={selected}
 										setSelected={setSelected}
 									/>
