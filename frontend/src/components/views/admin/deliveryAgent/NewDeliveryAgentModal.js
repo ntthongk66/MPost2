@@ -303,7 +303,7 @@ const NewDeliveryAgentModal = (props) => {
 	return (
 		<div>
 			<Dialog open={props.modalOpen} onClose={props.handleModalClose}>
-				<DialogTitle>Add Staff</DialogTitle>
+				<DialogTitle>Add New</DialogTitle>
 				<Box>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs value={value} onChange={handleTabChange} centered>
@@ -312,7 +312,7 @@ const NewDeliveryAgentModal = (props) => {
                 {...additionalTabWiseAttributes(0)}
               /> */}
 							<Tab
-								label='Add new DeliveryAgent'
+								label='Add new Warehouse Management'
 								{...additionalTabWiseAttributes(0)}
 							/>
 						</Tabs>
@@ -389,7 +389,7 @@ const NewDeliveryAgentModal = (props) => {
 							}) => (
 								<form onSubmit={handleSubmit}>
 									<Typography sx={{ backgroundColor: 'yellow' }}>
-										Department Details
+										Warehouse Details
 									</Typography>
 									<Box
 										display='grid'
@@ -400,7 +400,7 @@ const NewDeliveryAgentModal = (props) => {
 											fullWidth
 											variant='standard'
 											type='text'
-											label='Deparment Name'
+											label='Warehouse Name'
 											onBlur={handleBlur}
 											onChange={handleChange}
 											name='name'

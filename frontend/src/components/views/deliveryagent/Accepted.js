@@ -147,60 +147,140 @@ const getRowsList = (couriersList) => {
 	return rowsList
 }
 
-const createPdf = (data) => {
-	const pdfGenerator = pdfMake.createPdf({
-		pageSize: 'A7',
-		header: [
-			{
-				text: 'Courier TnM',
-				margin: 5,
-				fontSize: '10',
-				bold: true,
-				alignment: 'center',
-			},
-		],
+const createPdf = async (data) => {
+	const getImageAsBase64 = async (imageUrl) => {
+		try {
+			const response = await fetch(imageUrl);
+			const blob = await response.blob();
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.onloadend = () => resolve(reader.result);
+				reader.onerror = reject;
+				reader.readAsDataURL(blob);
+			});
+		} catch (error) {
+			console.error('Error fetching image as base64:', error);
+			return null;
+		}
+	};
+
+	const imageUrl = 'https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png';
+	const QR = 'https://i.ibb.co/TYb0C5w/qrcode-localhost.png';
+	// Đường dẫn hình ảnh
+	const logo = await getImageAsBase64(imageUrl);
+	const QRimage = await getImageAsBase64(QR);
+	const pdfDefinition = {
 		content: [
 			{
-				text: 'Receiver Details',
-				fontSize: '7',
-				bold: true,
-				decoration: 'underline',
+				columns: [
+					{
+						image: logo, // Sử dụng base64 để chèn hình ảnh vào tài liệu PDF
+						width: 150,
+						margin: [10, 10],
+						alignment: 'center',
+					},
+					{
+					},
+					{
+						image: QRimage, // Sử dụng base64 để chèn hình ảnh vào tài liệu PDF
+						width: 150,
+						margin: [10, 10],
+						alignment: 'center',
+					},
+				]
 			},
 			{
-				text: `Name: ${data.receiver.name}\nPhone: ${data.receiver.phoneNumber}\nEmail: ${data.receiver.email}\nAddress: ${data.receiver.location}, ${data.receiver.city}, ${data.receiver.state}, ${data.receiver.country}, ${data.receiver.pincode}`,
-				fontSize: '5',
-				marginTop: 2,
+				style: 'tableExample',
+				table: {
+					widths: ['*', '*'],
+					body: [
+						[
+							{
+								stack: [
+									{ text: 'Receiver Details', bold: true },
+									{
+										ul: [
+											{ text: `Name: ${data.receiver.name}` },
+											{ text: `Phone: ${data.receiver.phoneNumber}` },
+											{ text: `Email: ${data.receiver.email}` },
+											{ text: `Address: ${data.receiver.location}, ${data.receiver.city}, ${data.receiver.state}, ${data.receiver.country}, ${data.receiver.pincode}` },
+										],
+									},
+								],
+								margin: [0, 0, 0, 10],
+							},
+							{
+								stack: [
+									{ text: 'Sender Details', bold: true },
+									{
+										ul: [
+											{ text: `Name: ${data.sender.name}` },
+											{ text: `Phone: ${data.sender.phoneNumber}` },
+											{ text: `Email: ${data.sender.email}` },
+											{ text: `Address: ${data.sender.location}, ${data.sender.city}, ${data.sender.state}, ${data.sender.country}, ${data.sender.pincode}` },
+										],
+									},
+								],
+								margin: [0, 0, 0, 10],
+							},
+						],
+					],
+				},
 			},
 			{
-				text: 'Sender Details',
-				fontSize: '7',
-				bold: true,
-				decoration: 'underline',
-				marginTop: 5,
-			},
-			{
-				text: `Name: ${data.sender.name}\nPhone: ${data.sender.phoneNumber}\nEmail: ${data.sender.email}\nAddress: ${data.sender.location}, ${data.sender.city}, ${data.sender.state}, ${data.sender.country}, ${data.sender.pincode}`,
-				fontSize: '5',
-				marginTop: 2,
-			},
-			{
-				text: 'Package Details',
-				fontSize: '7',
-				bold: true,
-				decoration: 'underline',
-				marginTop: 5,
-			},
-			{
-				text: `Reference ID: ${data.id}\nItem Description: ${data.item}\nWeight: ${data.weight}`,
-				fontSize: '5',
-				bold: true,
-				marginTop: 5,
+				style: 'tableExample',
+				table: {
+					widths: ['*'],
+					body: [
+						[
+							{
+								stack: [
+									{ text: 'Package Details', bold: true },
+									{
+										ul: [
+											{ text: `Reference ID: ${data.id}` },
+											{ text: `Item Description: ${data.item}` },
+											{ text: `Weight: ${data.weight}` },
+											{ text: `Status: ${data.status}` },
+										],
+									},
+								],
+								margin: [0, 10, 0, 0],
+							},
+						],
+					],
+				},
 			},
 		],
-	})
-	var win = window.open('', '_blank')
-	pdfGenerator.print({}, win)
-}
+		pageSize: 'A4',
+		pageOrientation: 'landscape',
+		header: {
+			columns: [
+				{
+					text: 'Magic Post',
+					fontSize: 25,
+					bold: true,
+					italics: true,
+					margin: [10, 10],
+					alignment: 'center',
+				},
+				{
+				},
+				{
+					text: 'QR code', // Thêm thông tin về mã QR code nếu cần thiết
+					fontSize: 14,
+					bold: true,
+					margin: [10, 10, 10, 10],
+					alignment: 'center',
+				},
+			],
+		},
+	}
+
+	const pdfDocument = pdfMake.createPdf(pdfDefinition);
+	var win = window.open('', '_blank');
+	pdfDocument.open({}, win);
+};
 
 const CouriersAccepted = () => {
 	pdfMake.vfs = pdfFonts.pdfMake.vfs

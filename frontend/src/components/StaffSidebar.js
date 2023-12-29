@@ -92,7 +92,7 @@ const StaffSidebar = () => {
                   variant='h5'
                   style={{ color: 'black', fontWeight: 'bold' }}
                 >
-                  CourierTnM
+                  Magic Post
                 </Typography>
                 <img
                   src='https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png'

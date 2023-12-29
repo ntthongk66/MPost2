@@ -163,7 +163,7 @@ const DeliveryAgentDetailModal = (props) => {
 	return (
 		<div>
 			<Dialog open={props.modalOpen} onClose={props.handleModalClose}>
-				<DialogTitle>Department Details</DialogTitle>
+				<DialogTitle>Warehouse Details</DialogTitle>
 				<Box>
 					<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 						<Tabs value={value} onChange={handleTabChange} centered>

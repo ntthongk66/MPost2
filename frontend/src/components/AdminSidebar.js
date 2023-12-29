@@ -17,6 +17,7 @@ import ShareLocationOutlinedIcon from '@mui/icons-material/ShareLocationOutlined
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined'
 import DeliveryDiningOutlinedIcon from '@mui/icons-material/DeliveryDiningOutlined'
 import PeopleAlt from '@mui/icons-material/PeopleAlt'
+import WarehouseIcon from '@mui/icons-material/Warehouse';
 import { useDispatch } from 'react-redux'
 import { logout } from '../state/actions/authActions'
 import colors from '../colors'
@@ -91,7 +92,7 @@ const Sidebar = () => {
 									variant='h5'
 									style={{ color: 'black', fontWeight: 'bold' }}
 								>
-									CourierTnM
+									Magic Post
 								</Typography>
 								<img
 									src='https://i.ibb.co/svJ55Td/Courier-Tn-M-removebg-preview.png'
@@ -112,8 +113,8 @@ const Sidebar = () => {
 								</Typography>
 								<Typography>
 									{admin
-										? `Admin Email # ${admin.email}`
-										: `Registration Number # ${department.registrationNumber}`}
+										? `Admin Email: ${admin.email}`
+										: `Registration Number: ${department.registrationNumber}`}
 								</Typography>
 							</Box>
 						</Box>
@@ -123,7 +124,7 @@ const Sidebar = () => {
 									<Item
 										title='Departments'
 										to='/admin/departments'
-										icon={<AppRegistrationOutlinedIcon />}
+										icon={<DeliveryDiningOutlinedIcon />}
 										selected={selected}
 										setSelected={setSelected}
 									/>
@@ -132,7 +133,7 @@ const Sidebar = () => {
 									<Item
 										title='Warehouses'
 										to='/admin/deliveryAgents'
-										icon={<DeliveryDiningOutlinedIcon />}
+										icon={<WarehouseIcon />}
 										selected={selected}
 										setSelected={setSelected}
 									/>
