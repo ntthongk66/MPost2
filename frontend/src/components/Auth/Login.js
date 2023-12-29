@@ -37,7 +37,7 @@ function Login(prop) {
         }}
       >
         <div id='loginText' style={{ fontSize: '20pt', fontWeight: 'bold' }}>
-          Hey! Welcome
+          Hey! Welcome Department Management
         </div>
         <div style={{ color: 'grey', fontSize: '10pt' }}>
           Login to deliver with ease
@@ -92,7 +92,7 @@ function Login(prop) {
                 }}
                 onClick={() => prop.handleAuthToggle(true)}
               >
-                Create an Account
+                
               </Button>
             </Grid>
           </Grid>

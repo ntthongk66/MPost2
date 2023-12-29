@@ -39,7 +39,23 @@ const Auth = () => {
                       backgroundColor: 'black',
                     }}
                   >
-                    I'm a delivery agent
+                    I'm a warehouse management
+                  </Button>
+                </Link>
+                
+                <Link to="/auth/staffTransaction" style={{ textDecoration: 'none' }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{
+                      mt: 1,   // Đổi mt từ 2 xuống 1 để giữ nút "Track Courier" ngay dưới
+                      ml: 3,   // Thêm khoảng cách giữa các nút
+                      borderRadius: '20px',
+                      color: 'white',
+                      backgroundColor: 'black',
+                    }}
+                  >
+                    Staff
                   </Button>
                 </Link>
                 <Link to="/track/courier" style={{ textDecoration: 'none' }}>
@@ -55,21 +71,6 @@ const Auth = () => {
                     }}
                   >
                     Track Courier
-                  </Button>
-                </Link>
-                <Link to="/auth/staffTransaction" style={{ textDecoration: 'none' }}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{
-                      mt: 1,   // Đổi mt từ 2 xuống 1 để giữ nút "Track Courier" ngay dưới
-                      ml: 3,   // Thêm khoảng cách giữa các nút
-                      borderRadius: '20px',
-                      color: 'white',
-                      backgroundColor: 'black',
-                    }}
-                  >
-                    Staff
                   </Button>
                 </Link>
               </Box>

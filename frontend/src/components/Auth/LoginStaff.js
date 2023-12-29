@@ -47,6 +47,22 @@ function LoginStaffTransaction() {
 						I'm a warehouse staff
 					</Button>
 				</Link>
+				
+				<Link to="/auth" style={{ textDecoration: 'none' }}>
+					<Button
+						variant="contained"
+						color="primary"
+						sx={{
+							mt: 1,   // Đổi mt từ 2 xuống 1 để giữ nút "Track Courier" ngay dưới
+							ml: 2,   // Thêm khoảng cách giữa các nút
+							borderRadius: '20px',
+							color: 'white',
+							backgroundColor: 'black',
+						}}
+					>
+						Management
+					</Button>
+				</Link>
 				<Link to="/track/courier" style={{ textDecoration: 'none' }}>
 					<Button
 						variant="contained"
@@ -60,21 +76,6 @@ function LoginStaffTransaction() {
 						}}
 					>
 						Track Courier
-					</Button>
-				</Link>
-				<Link to="/auth" style={{ textDecoration: 'none' }}>
-					<Button
-						variant="contained"
-						color="primary"
-						sx={{
-							mt: 1,   // Đổi mt từ 2 xuống 1 để giữ nút "Track Courier" ngay dưới
-							ml: 2,   // Thêm khoảng cách giữa các nút
-							borderRadius: '20px',
-							color: 'white',
-							backgroundColor: 'black',
-						}}
-					>
-						Admin
 					</Button>
 				</Link>
 			</Box>
@@ -94,7 +95,7 @@ function LoginStaffTransaction() {
 									id='loginText'
 									style={{ fontSize: '20pt', fontWeight: 'bold' }}
 								>
-									Hey! Welcome
+									Hey! Welcome Department Staff
 								</div>
 								<div style={{ color: 'grey', fontSize: '10pt' }}>
 									Login to deliver with ease
