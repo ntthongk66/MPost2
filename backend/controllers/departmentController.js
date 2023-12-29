@@ -303,6 +303,30 @@ async function updateStaffProfile(req, res) {
   }
 }
 
+async function deleteStaffTransactionPoint (req, res) {
+	const staffTransactionPointDetails = req.body.staffTransactionPointDetails
+	const id = staffTransactionPointDetails._id
+	// alert(id)
+	await StaffTransactionPoint.deleteOne({
+		_id: id
+	})
+	.then(data => {
+		res.status(201).json({
+			status: 'success',
+			message: 'Delete successfully!',
+			data: {}
+		})
+	})
+	.catch(error => {
+		console.log(error.message)
+		return res.status(500).json({ 
+			status: 'failure',
+			message: 'Something went wrong !',
+			data: {} 
+		})
+	})
+}
+
 module.exports = {
   addDepartment,
   loginDepartment,
@@ -310,4 +334,5 @@ module.exports = {
   updateDepartmentProfile,
   addStaffTransactionPoint,
   updateStaffProfile,
+  deleteStaffTransactionPoint
 }

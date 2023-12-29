@@ -198,6 +198,30 @@ async function addDepartment(req, res) {
   }
 }
 
+async function deleteDepartment (req, res) {
+	const departmentDetails = req.body.departmentDetails
+	const id = departmentDetails._id
+	// alert(id)
+	await Department.deleteOne({
+		_id: id
+	})
+	.then(data => {
+		res.status(201).json({
+			status: 'success',
+			message: 'Deleted successfully!',
+			data: {}
+		})
+	})
+	.catch(error => {
+		console.log(error.message)
+		return res.status(500).json({ 
+			status: 'failure',
+			message: 'Something went wrong !',
+			data: {} 
+		})
+	})
+}
+
 
 /*
 @ method: get
@@ -367,6 +391,7 @@ module.exports = {
 	loginAdmin,
 	getAllDepartment,
 	updateDepartmentProfile,
+	deleteDepartment,
 	addDepartment,
 	getAllDeliveryAgent,
 	updateDeliveryAgentProfile,

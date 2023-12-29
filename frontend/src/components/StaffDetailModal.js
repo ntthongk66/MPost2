@@ -127,6 +127,52 @@ const StaffDetailModal = (props) => {
 					theme: 'light',
 				})
 			} else {
+				// toast.error('Something went wrong !', {
+				// 	position: 'top-right',
+				// 	autoClose: 5000,
+				// 	hideProgressBar: false,
+				// 	closeOnClick: true,
+				// 	pauseOnHover: true,
+				// 	draggable: true,
+				// 	progress: undefined,
+				// 	theme: 'light',
+				// })
+			}
+		} catch (error) {
+			console.log(error)
+		}
+		props.handleModalClose()
+	}
+
+	const handleDeleteStaffTransactionPoint = async () => {
+		const data = {
+			staffTransactionPointDetails: { _id: props.data.id },
+		}
+		try {
+			const url = `${apiHost}/api/departments/deleteStaffTransactionPoint`
+			const response = await fetch(url, {
+				method: 'delete',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${auth.accessToken}`,
+				},
+			})
+
+			// const courierUpdateResponse = await response.json()
+
+			if (response.status === 201) {
+				toast.success('Deleted Successfully', {
+					position: 'top-right',
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: 'light',
+				})
+			} else {
 				toast.error('Something went wrong !', {
 					position: 'top-right',
 					autoClose: 5000,
@@ -277,6 +323,19 @@ const StaffDetailModal = (props) => {
                         </Select>
                       </Box> */}
 											<Box display='flex' justifyContent='end' mt='20px'>
+											<Button
+													type='text'
+													variant='contained'
+													onClick={handleDeleteStaffTransactionPoint}
+													sx={{
+														color: 'white',
+														backgroundColor: 'black',
+														borderRadius: '20px',
+													}}
+												>
+													Delete
+												</Button>
+
 												<Button
 													type='submit'
 													variant='contained'

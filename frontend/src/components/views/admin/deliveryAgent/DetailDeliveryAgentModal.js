@@ -143,16 +143,16 @@ const DeliveryAgentDetailModal = (props) => {
 					theme: 'light',
 				})
 			} else {
-				toast.error('Something went wrong !', {
-					position: 'top-right',
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: 'light',
-				})
+				// toast.error('Something went wrong !', {
+				// 	position: 'top-right',
+				// 	autoClose: 5000,
+				// 	hideProgressBar: false,
+				// 	closeOnClick: true,
+				// 	pauseOnHover: true,
+				// 	draggable: true,
+				// 	progress: undefined,
+				// 	theme: 'light',
+				// })
 			}
 		} catch (error) {
 			console.log(error)

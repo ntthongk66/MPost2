@@ -448,6 +448,30 @@ async function updateCourierEntry(req, res) {
   }
 }
 
+async function deleteCourier (req, res) {
+	const courierDetails = req.body.courierDetails
+	const id = courierDetails._id
+	// alert(id)
+	await Courier.deleteOne({
+		_id: id
+	})
+	.then(data => {
+		res.status(201).json({
+			status: 'success',
+			message: 'Delete successfully!',
+			data: {}
+		})
+	})
+	.catch(error => {
+		console.log(error.message)
+		return res.status(500).json({ 
+			status: 'failure',
+			message: 'Something went wrong !',
+			data: {} 
+		})
+	})
+}
+
 module.exports = {
   addCourierEntry,
   getAllCouriers,
@@ -456,4 +480,5 @@ module.exports = {
   updateCourierEntry,
   getAllCouriersWh,
   updateCourierEntryWh,
+  deleteCourier
 }

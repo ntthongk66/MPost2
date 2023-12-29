@@ -143,6 +143,52 @@ const DepartmentDetailModal = (props) => {
 					theme: 'light',
 				})
 			} else {
+				// toast.error('Something went wrong !', {
+				// 	position: 'top-right',
+				// 	autoClose: 5000,
+				// 	hideProgressBar: false,
+				// 	closeOnClick: true,
+				// 	pauseOnHover: true,
+				// 	draggable: true,
+				// 	progress: undefined,
+				// 	theme: 'light',
+				// })
+			}
+		} catch (error) {
+			console.log(error)
+		}
+		props.handleModalClose()
+	}
+	
+	const handleDeleteDepartment = async () => {
+		const data = {
+			departmentDetails: { _id: props.data.id },
+		}
+		try {
+			const url = `${apiHost}/api/admin/deleteDepartment`
+			const response = await fetch(url, {
+				method: 'delete',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${auth.accessToken}`,
+				},
+			})
+
+			// const courierUpdateResponse = await response.json()
+
+			if (response.status === 201) {
+				toast.success('Deleted Successfully', {
+					position: 'top-right',
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: 'light',
+				})
+			} else {
 				toast.error('Something went wrong !', {
 					position: 'top-right',
 					autoClose: 5000,
@@ -159,50 +205,6 @@ const DepartmentDetailModal = (props) => {
 		}
 		props.handleModalClose()
 	}
-	
-	// const handleDeleteDepartment = async () => {
-	// 	const _id = props.data.id
-	// 	try {
-	// 		const url = `${apiHost}/api/admin/updateDepartments`
-	// 		const response = await fetch(url, {
-	// 			method: 'PATCH',
-	// 			body: JSON.stringify(data),
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 				Authorization: `Bearer ${auth.accessToken}`,
-	// 			},
-	// 		})
-
-	// 		// const courierUpdateResponse = await response.json()
-
-	// 		if (response.status === 204) {
-	// 			toast.success('Updated Successfully', {
-	// 				position: 'top-right',
-	// 				autoClose: 5000,
-	// 				hideProgressBar: false,
-	// 				closeOnClick: true,
-	// 				pauseOnHover: true,
-	// 				draggable: true,
-	// 				progress: undefined,
-	// 				theme: 'light',
-	// 			})
-	// 		} else {
-	// 			toast.error('Something went wrong !', {
-	// 				position: 'top-right',
-	// 				autoClose: 5000,
-	// 				hideProgressBar: false,
-	// 				closeOnClick: true,
-	// 				pauseOnHover: true,
-	// 				draggable: true,
-	// 				progress: undefined,
-	// 				theme: 'light',
-	// 			})
-	// 		}
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// 	props.handleModalClose()
-	// }
 
 	return (
 		<div>
@@ -379,10 +381,9 @@ const DepartmentDetailModal = (props) => {
 											<Box display='flex' justifyContent='end' mt='20px'>
 
 												<Button
-													type='submit'
+													type='text'
+													onClick={handleDeleteDepartment}
 													variant='contained'
-													paddingRight = "10"
-													marginRight = "10"
 													sx={{
 														color: 'white',
 														backgroundColor: 'black',
