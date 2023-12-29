@@ -16,7 +16,7 @@ const jwt = require('jsonwebtoken')
 */
 async function loginDeliveryAgent(req, res) {
   const email = req.body.email
-  const password = req.body.password
+  const deliveryAgentInputPassword = req.body.password
 
   try {
     const deliveryAgent = await DeliveryAgent.findOne({
@@ -33,8 +33,12 @@ async function loginDeliveryAgent(req, res) {
 
     const loggedInDeliveryAgent = { _id: deliveryAgent._id }
     const accessToken = jwt.sign(loggedInDeliveryAgent, process.env.JWT_SECRET)
+    const decryptedPasswordDB = await decryptPassword(
+      deliveryAgentInputPassword,
+      deliveryAgent.password
+    )
 
-    if (password === deliveryAgent.password) {
+    if (decryptedPasswordDB) {
       const delAgent = deliveryAgent.toObject()
       delete delAgent.password
 

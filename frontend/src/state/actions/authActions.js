@@ -466,6 +466,65 @@ export const loginStaffWarehouse = (credential) => {
   }
 }
 
+export const loginAdmin = (credential) => {
+  return (dispatch) => {
+    const url = `${apiHost}/api/admin/loginAdmin`
+    fetch(url, {
+      method: 'post',
+      body: JSON.stringify({
+        email: credential.email,
+        password: credential.password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.status === 404) {
+          dispatch({
+            type: 'ADMIN_NOT_FOUND',
+          })
+          toast.error('admin not found with given credentials', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+          })
+        } else if (response.status === 401) {
+          dispatch({
+            type: 'INVALID_PASSWORD',
+          })
+          toast.error('Invalid Password', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+          })
+        } else if (response.status === 200) {
+          response.json().then((res) => {
+            dispatch({
+              type: 'ADMIN_LOGIN_SUCCESS',
+              payload: res.data,//
+            })
+          })
+        }
+      })
+      .catch((error) => {
+        dispatch({
+          type: 'LOGIN_REQUEST_ERROR',
+        })
+      })
+  }
+}
+
 export const logout = () => {
   return (dispatch) => {
     dispatch({

@@ -11,6 +11,7 @@ import Track from '../views/department/Track'
 import LoginDeliveryAgent from './LoginDeliveryAgent'
 import LoginStaffTransaction from './LoginStaff'
 import LoginStaffWarehouse from './LoginStaffWh'
+import LoginAdmin from './LoginAdmin'
 
 const Auth = () => {
   const auth = useSelector((state) => state.auth)
@@ -107,6 +108,7 @@ const Auth = () => {
 
         <Route exact path='auth/staffTransaction' element={<LoginStaffTransaction/>}/>
         <Route exact path='auth/staffWarehouse' element={<LoginStaffWarehouse/>}/>
+        <Route exact path='auth/admin' element={<LoginAdmin/>}/>
 
         <Route path='*' element={<Navigate to='/auth' replace />} />
       </Routes>
