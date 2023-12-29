@@ -92,7 +92,7 @@ function Login(prop) {
                 }}
                 onClick={() => prop.handleAuthToggle(true)}
               >
-                Create an Account
+                
               </Button>
             </Grid>
           </Grid>
