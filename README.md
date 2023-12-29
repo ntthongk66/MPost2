@@ -1,15 +1,13 @@
 # BÀI TẬP LỚN MAGICPOST
 
 ## Sinh viên thực hiện
-| Họ và tên | Mã Sinh Viên| 
-|--------------|-------|
-| Nguyễn Tiến Thông | 21020408|
-| Phan Mạnh Thắng | 21020405|
-| Đỗ Đức Huy | 21020124| 
+| Họ và tên | Mã Sinh Viên| Công việc | 
+|--------------|-------|---------------|
+| Nguyễn Tiến Thông | 21020408| Nhóm trưởng + BE|
+| Phan Mạnh Thắng | 21020405| FE |
+| Đỗ Đức Huy | 21020124| FE |
 ## Video demo
 [Link]()
-
-
 
 
 ## Giới thiệu
@@ -56,5 +54,34 @@ Công ty cần phát triển một phần mềm nhằm quản lý hệ thống c
 
 - [x] Tra cứu trạng thái và tiến trình chuyển phát của kiện hàng mình gửi.
 
-## Các công nghệ sử dụng
-- bla bla
+## Hướng dẫn sử dụng
+### Prerequisites
+- [Node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+- [Git](https://git-scm.com/)
+
+### Phía Backend
+1. Install dependencies:
+```bash	
+    npm install
+```	
+2. Create an .env file and provide the required configuration values. This file would require you to enter mongodb connection string, JWT Key, SMTP details.
+
+3. Running:
+```bash
+    npm run start
+```
+( By default the backend will run on port 4545. Therefore you can access the backend at http://localhost:4545)
+
+### Phía Frontend
+1. Install dependencies:
+```bash	
+    npm install
+```	
+
+2. Change the apiHost in the apiLoc.js to backend endpoint (http://localhost:4545 for localhost, should be same as proxy in package.json).
+
+3. Running:
+```bash
+    npm run start
+```
