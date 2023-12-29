@@ -15,6 +15,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import ShareLocationOutlinedIcon from '@mui/icons-material/ShareLocationOutlined'
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined'
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import DeliveryDiningOutlinedIcon from '@mui/icons-material/DeliveryDiningOutlined'
 import PeopleAlt from '@mui/icons-material/PeopleAlt'
 import WarehouseIcon from '@mui/icons-material/Warehouse';
@@ -124,7 +125,7 @@ const Sidebar = () => {
 									<Item
 										title='Departments'
 										to='/admin/departments'
-										icon={<DeliveryDiningOutlinedIcon />}
+										icon={<HomeWorkIcon />}
 										selected={selected}
 										setSelected={setSelected}
 									/>

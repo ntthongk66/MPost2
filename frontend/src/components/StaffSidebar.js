@@ -11,11 +11,13 @@ import { Link, useLocation } from 'react-router-dom'
 import 'react-pro-sidebar/dist/css/styles.css'
 import HomeIcon from '@mui/icons-material/Home'
 // import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import ShareLocationOutlinedIcon from '@mui/icons-material/ShareLocationOutlined'
-import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined'
-import DeliveryDiningOutlinedIcon from '@mui/icons-material/DeliveryDiningOutlined'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+// import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined'
+// import DeliveryDiningOutlinedIcon from '@mui/icons-material/DeliveryDiningOutlined'
 // import PeopleAlt from '@mui/icons-material/PeopleAlt'
 import { useDispatch } from 'react-redux'
 import { logout } from '../state/actions/authActions'
@@ -124,7 +126,7 @@ const StaffSidebar = () => {
                   <Item
                     title='Waiting'
                     to='/staffWarehouse/waiting'
-                    icon={<AppRegistrationOutlinedIcon />}
+                    icon={<HourglassBottomIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
@@ -133,7 +135,7 @@ const StaffSidebar = () => {
                   <Item
                     title='accepted'
                     to='/staffWarehouse/accepted'
-                    icon={<DeliveryDiningOutlinedIcon />}
+                    icon={<CheckCircleOutlineIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />

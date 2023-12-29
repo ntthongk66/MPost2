@@ -142,6 +142,9 @@ const NewDepartmentModal = (props) => {
 				state: formData.state,
 				pinCode: formData.pinCode,
 				country: formData.country,
+				accepted: "0",
+				refused: "0",
+				dispatch: "0",
 			},
 		}
 		try {

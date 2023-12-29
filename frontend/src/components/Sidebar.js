@@ -121,7 +121,7 @@ const Sidebar = () => {
             </Box>
             {deliveryAgent ? (
               <Box>
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                {/* <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='pickup'
                     to='/pickup'
@@ -129,8 +129,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                </Box>
-                <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
+                </Box> */}
+                {/* <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='deliver'
                     to='/deliver'
@@ -138,7 +138,7 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                </Box>
+                </Box> */}
                 <Box paddingLeft={'10%'} marginRight={2} marginTop={1}>
                   <Item
                     title='Dashboard'
