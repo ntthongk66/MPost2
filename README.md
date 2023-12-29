@@ -1,6 +1,6 @@
 # BÀI TẬP LỚN MAGICPOST
 
-## Sinh viên thực hiện
+## Sinh viên thực hiện - nhóm 8
 | Họ và tên | Mã Sinh Viên| Công việc | 
 |--------------|-------|---------------|
 | Nguyễn Tiến Thông | 21020408| Nhóm trưởng + BE|
@@ -55,33 +55,34 @@ Công ty cần phát triển một phần mềm nhằm quản lý hệ thống c
 - [x] Tra cứu trạng thái và tiến trình chuyển phát của kiện hàng mình gửi.
 
 ## Hướng dẫn sử dụng
-### Prerequisites
+### Yêu cầu tiên quyết
+Trước khi bắt đầu, hãy đảm bảo bạn đã cài đặt các phần sau trên máy của mình:
 - [Node.js](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
 - [Git](https://git-scm.com/)
 
 ### Phía Backend
-1. Install dependencies:
+1. Cài dependencies:
 ```bash	
     npm install
 ```	
-2. Create an .env file and provide the required configuration values. This file would require you to enter mongodb connection string, JWT Key, SMTP details.
+2. Tạo tệp .env và cung cấp các giá trị cấu hình cần thiết: DATABASE_URI, JWT_SECRET, JWT_REFRESH_SECRET, NODEMAILER_EMAIL và ODEMAILER_PASS.
 
-3. Running:
+3. Chạy:
 ```bash
     npm run start
 ```
-( By default the backend will run on port 4545. Therefore you can access the backend at http://localhost:4545)
+( Mặc định, backend sẽ chạy trên cổng 4545. http://localhost:4545)
 
 ### Phía Frontend
-1. Install dependencies:
+1. Cài dependencies:
 ```bash	
     npm install
 ```	
 
-2. Change the apiHost in the apiLoc.js to backend endpoint (http://localhost:4545 for localhost, should be same as proxy in package.json).
+2. Thay đổi apiHost trong apiLoc.js (http://localhost:4545 cho máy cục bộ)
 
-3. Running:
+3. Chạy:
 ```bash
     npm run start
 ```
