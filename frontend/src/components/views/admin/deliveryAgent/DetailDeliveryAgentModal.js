@@ -160,6 +160,52 @@ const DeliveryAgentDetailModal = (props) => {
 		props.handleModalClose()
 	}
 
+	const handleDeleteDeliveryAgent = async () => {
+		const data = {
+			deliveryAgentDetails: { _id: props.data.id }
+		}
+		try {
+			const url = `${apiHost}/api/admin/deleteDeliveryAgent`
+			const response = await fetch(url, {
+				method: 'delete',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${auth.accessToken}`,
+				},
+			})
+
+			// const courierUpdateResponse = await response.json()
+
+			if (response.status === 201) {
+				toast.success('Deleted Successfully', {
+					position: 'top-right',
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: 'light',
+				})
+			} else {
+				toast.error('Something went wrong !', {
+					position: 'top-right',
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: 'light',
+				})
+			}
+		} catch (error) {
+			console.log(error)
+		}
+		props.handleModalClose()
+	}
+
 	return (
 		<div>
 			<Dialog open={props.modalOpen} onClose={props.handleModalClose}>
@@ -333,6 +379,20 @@ const DeliveryAgentDetailModal = (props) => {
 											</Box>
 
 											<Box display='flex' justifyContent='end' mt='20px'>
+
+												<Button
+													type='text'
+													variant='contained'
+													onClick={handleDeleteDeliveryAgent}
+													sx={{
+														color: 'white',
+														backgroundColor: 'black',
+														borderRadius: '20px',
+													}}
+												>
+													Delete
+												</Button>
+
 												<Button
 													type='submit'
 													variant='contained'

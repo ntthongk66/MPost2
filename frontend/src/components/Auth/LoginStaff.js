@@ -94,7 +94,7 @@ function LoginStaffTransaction() {
 									id='loginText'
 									style={{ fontSize: '20pt', fontWeight: 'bold' }}
 								>
-									Welcome Transaction Staff
+									Welcome Transaction Staff!
 								</div>
 								<div style={{ color: 'grey', fontSize: '10pt' }}>
 									Login to deliver with ease

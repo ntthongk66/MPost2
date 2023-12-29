@@ -96,6 +96,8 @@ route.post('/admin/addDepartment', authorizeAdmin, AdminController.addDepartment
 
 route.get('/admin/getDeliveryAgents', authorizeAdmin,AdminController.getAllDeliveryAgent)
 
+route.delete('/admin/deleteDeliveryAgent', authorizeAdmin, AdminController.deleteDeliveryAgent)
+
 route.patch('/admin/updateDeliveryAgents', authorizeAdmin, AdminController.updateDeliveryAgentProfile)
 
 route.post('/admin/addDeliveryAgent', authorizeAdmin, AdminController.addDeliveryAgent)

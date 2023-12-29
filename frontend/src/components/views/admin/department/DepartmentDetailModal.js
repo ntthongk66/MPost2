@@ -159,6 +159,50 @@ const DepartmentDetailModal = (props) => {
 		}
 		props.handleModalClose()
 	}
+	
+	// const handleDeleteDepartment = async () => {
+	// 	const _id = props.data.id
+	// 	try {
+	// 		const url = `${apiHost}/api/admin/updateDepartments`
+	// 		const response = await fetch(url, {
+	// 			method: 'PATCH',
+	// 			body: JSON.stringify(data),
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 				Authorization: `Bearer ${auth.accessToken}`,
+	// 			},
+	// 		})
+
+	// 		// const courierUpdateResponse = await response.json()
+
+	// 		if (response.status === 204) {
+	// 			toast.success('Updated Successfully', {
+	// 				position: 'top-right',
+	// 				autoClose: 5000,
+	// 				hideProgressBar: false,
+	// 				closeOnClick: true,
+	// 				pauseOnHover: true,
+	// 				draggable: true,
+	// 				progress: undefined,
+	// 				theme: 'light',
+	// 			})
+	// 		} else {
+	// 			toast.error('Something went wrong !', {
+	// 				position: 'top-right',
+	// 				autoClose: 5000,
+	// 				hideProgressBar: false,
+	// 				closeOnClick: true,
+	// 				pauseOnHover: true,
+	// 				draggable: true,
+	// 				progress: undefined,
+	// 				theme: 'light',
+	// 			})
+	// 		}
+	// 	} catch (error) {
+	// 		console.log(error)
+	// 	}
+	// 	props.handleModalClose()
+	// }
 
 	return (
 		<div>
@@ -333,6 +377,21 @@ const DepartmentDetailModal = (props) => {
 											</Box>
 
 											<Box display='flex' justifyContent='end' mt='20px'>
+
+												<Button
+													type='submit'
+													variant='contained'
+													paddingRight = "10"
+													marginRight = "10"
+													sx={{
+														color: 'white',
+														backgroundColor: 'black',
+														borderRadius: '20px',
+													}}
+												>
+													Delete
+												</Button>
+
 												<Button
 													type='submit'
 													variant='contained'
@@ -344,6 +403,7 @@ const DepartmentDetailModal = (props) => {
 												>
 													Update
 												</Button>
+
 											</Box>
 										</form>
 									)}

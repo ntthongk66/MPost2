@@ -280,6 +280,29 @@ async function updateDeliveryAgentProfile(req, res) {
 	}
 }
 
+async function deleteDeliveryAgent (req, res) {
+	const deliveryAgentDetails = req.body.deliveryAgentDetails
+	const id = deliveryAgentDetails._id
+	// alert(id)
+	await DeliveryAgent.deleteOne({
+		_id: id
+	})
+	.then(data => {
+		res.status(201).json({
+			status: 'success',
+			message: 'Delete successfully!',
+			data: {}
+		})
+	})
+	.catch(error => {
+		console.log(error.message)
+		return res.status(500).json({ 
+			status: 'failure',
+			message: 'Something went wrong !',
+			data: {} 
+		})
+	})
+}
 
 async function addDeliveryAgent(req, res) {
   try {
@@ -347,5 +370,6 @@ module.exports = {
 	addDepartment,
 	getAllDeliveryAgent,
 	updateDeliveryAgentProfile,
+	deleteDeliveryAgent,
 	addDeliveryAgent,
 }
